@@ -56,3 +56,5 @@ ga_tracking: UA-4005755-3
 
 plugins:
   - jekyll-seo-tag
+
+theme: jekyll-theme-slate
