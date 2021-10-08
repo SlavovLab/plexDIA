@@ -11,7 +11,7 @@ permalink: /
 
 {: .fs-9 }
 
-Multi<u>plex</u>ed <u>DIA</u>
+multi<u>plex</u>ed <u>DIA</u>
 {: .fs-6 .fw-300}
 
 ### Multiplexed data-independent acquisition (plexDIA) for increasing proteomics throughput
@@ -20,9 +20,8 @@ Multi<u>plex</u>ed <u>DIA</u>
 [SCoPE2 Paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02267-5){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [SCoPE2 code on GitHub](https://github.com/SlavovLab/SCoPE2/tree/master/code){: .btn .fs-5 .mb-4 .mb-md-0 }
 
-* [Highlights]({{site.baseurl}}#highlights)
-* [Reviews]({{site.baseurl}}#reviews)
-* [Perspectives]({{site.baseurl}}#perspectives)
+
+* [Perspective]({{site.baseurl}}#perspectives)
 
 
 ------------
@@ -35,26 +34,15 @@ The fate and physiology of individual cells are controlled by proteins. Yet, our
 
 ------------
 
-## Highlights
-* [Highlight by Nature Methods](https://www.nature.com/articles/s41592-021-01243-y)
-* [Technology feature at Nature Methods](https://www.nature.com/articles/s41592-019-0540-6)
-* [Single-cell proteomics for the Human Cell Atlas](https://news.northeastern.edu/2019/07/08/northeastern-university-proteomics-researcher-receives-grant-from-chan-zuckerberg-initiative-to-help-map-all-cells-in-the-human-body-to-better-understand-cancer-diabetes-and-other-diseases/)
-* [News in Proteomics Research](http://proteomicsnews.blogspot.com/2019/12/over-1000-single-cell-proteomes-2700.html)
-* [The single cell proteomics revolution](https://www.bioanalysis-zone.com/2020/02/11/single-cell-proteomics-revolution_bo/)
-
-## Reviews
-* [Single-cell protein analysis by mass spectrometry](https://doi.org/10.1016/j.cbpa.2020.04.018), *Current Opinion in Chemical Biology*
-* [Single cell protein analysis for systems biology](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6204083/),	*Essays in biochemistry*
 
 ## Perspectives
-* [Transformative Opportunities for Single-Cell Proteomics](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6089608/), *Journal of Proteome Research*
-* [Unpicking the proteome in single cells](https://science.sciencemag.org/content/367/6477/512), *Science*
+* [Driving Single Cell Proteomics Forward with Innovation](https://pubmed.ncbi.nlm.nih.gov/34597050/), *Journal of Proteome Research*
 
 
 
 ## About the project
 
-SCoPE2 is a project developed in the [Slavov Laboratory](http://slavovlab.net) and [SCP Center](http://center.single-cell.net) at [Northeastern University](https://www.northeastern.edu/), and was authored by [Harrison Specht](http://harrisonspecht.com), [Ed Emmott](http://edemmott.co.uk/), [Aleksandra Petelski](http://slavovlab.net/people.htm), [R. Gray Huffman](http://slavovlab.net/people.htm), [David H Perlman](http://slavovlab.net/people.htm), Marco Serra, [Peter Kharchenko](http://pklab.med.harvard.edu/), [Toni Koller](http://slavovlab.net/people.htm), and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
+plexDIA is a project developed in the [Slavov Laboratory](http://slavovlab.net) and [SCP Center](http://center.single-cell.net) at [Northeastern University](https://www.northeastern.edu/), and was authored by [Harrison Specht](http://harrisonspecht.com), [Ed Emmott](http://edemmott.co.uk/), [Aleksandra Petelski](http://slavovlab.net/people.htm), [R. Gray Huffman](http://slavovlab.net/people.htm), [David H Perlman](http://slavovlab.net/people.htm), Marco Serra, [Peter Kharchenko](http://pklab.med.harvard.edu/), [Toni Koller](http://slavovlab.net/people.htm), and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
 
 
 Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@northeastern.edu).
