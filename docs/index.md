@@ -7,14 +7,14 @@ permalink: /
 ---
 {% include social-media-links.html %}
 
-# **SCoPE2**:
+# **plexDIA**:
 
 {: .fs-9 }
 
-<u>S</u>ingle <u>C</u>ell <u>P</u>rot<u>E</u>omics by Mass Spectrometry (Version 2)
+Multi<u>plex</u>ed <u>DIA</u>
 {: .fs-6 .fw-300}
 
-### Quantifying proteins in single cells at high-throughput with mass spectrometry
+### Multiplexed data-independent acquisition (plexDIA) for increasing proteomics throughput
 
 [SCoPE2 Preprint](https://doi.org/10.1101/665307){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [SCoPE2 Paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02267-5){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
