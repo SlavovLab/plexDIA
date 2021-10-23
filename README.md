@@ -1,6 +1,5 @@
-# **plexDIA**
+# **plexDIA: Multiplexed data-independent acquisition**
 
-Multiplexed data-independent acquisition (plexDIA)
 
 <!--![GitHub release](https://img.shields.io/github/release/SlavovLab/DO-MS.svg)-->
 ![GitHub](https://img.shields.io/github/license/SlavovLab/DO-MS.svg)
