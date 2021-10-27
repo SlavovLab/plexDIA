@@ -2,21 +2,22 @@
 layout: default
 title: Home
 nav_order: 1
-description: "SCoPE2: Single-cell protein analysis by mass spectrometry; second generation SCoPE-MS"
+description: "plexDIA: Multiplexed data-independent acquisition for increasing proteomics throughput"
 permalink: /
 ---
 {% include social-media-links.html %}
 
 # multi<u>plex</u>ed <u>DIA</u>: *plexDIA*
 
+&nbsp;
+
 
 <!-- {: .fs-6 .fw-300}  {: .fs-9 } -->
 
 ### Multiplexed data-independent acquisition (plexDIA) for increasing proteomics throughput
 
-[SCoPE2 Preprint](https://doi.org/10.1101/665307){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[SCoPE2 Paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02267-5){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[SCoPE2 code on GitHub](https://github.com/SlavovLab/SCoPE2/tree/master/code){: .btn .fs-5 .mb-4 .mb-md-0 }
+[plexDIA Preprint](https://doi.org/10.1101/665307){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[plexDIA code on GitHub](https://github.com/SlavovLab/plxDIA){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 
 * [Perspectives]({{site.baseurl}}#perspectives)
