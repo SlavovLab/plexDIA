@@ -7,12 +7,10 @@ permalink: /
 ---
 {% include social-media-links.html %}
 
-# multi<u>plex</u>ed <u>DIA</u> **plexDIA**:
-
-{: .fs-9 }
+# multi<u>plex</u>ed <u>DIA</u>: *plexDIA*
 
 
-<!-- {: .fs-6 .fw-300} -->
+<!-- {: .fs-6 .fw-300}  {: .fs-9 } -->
 
 ### Multiplexed data-independent acquisition (plexDIA) for increasing proteomics throughput
 
@@ -21,7 +19,7 @@ permalink: /
 [SCoPE2 code on GitHub](https://github.com/SlavovLab/SCoPE2/tree/master/code){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 
-* [Perspective]({{site.baseurl}}#perspectives)
+* [Perspectives]({{site.baseurl}}#perspectives)
 
 
 ------------
