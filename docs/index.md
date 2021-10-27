@@ -8,24 +8,18 @@ permalink: /
 {% include social-media-links.html %}
 
 # multi<u>plex</u>ed <u>DIA</u>: *plexDIA*
+<!-- {: .fs-6 .fw-300}  {: .fs-9 } -->
 
 &nbsp;
-
-
-<!-- {: .fs-6 .fw-300}  {: .fs-9 } -->
 
 ### Multiplexed data-independent acquisition (plexDIA) for increasing proteomics throughput
 
 [plexDIA Preprint](https://doi.org/10.1101/665307){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [plexDIA code on GitHub](https://github.com/SlavovLab/plxDIA){: .btn .fs-5 .mb-4 .mb-md-0 }
 
-
-* [Perspectives]({{site.baseurl}}#perspectives)
-
-
 ------------
 
-The fate and physiology of individual cells are controlled by proteins. Yet, our ability to quantitatively analyze proteins in single cells has remained limited. To overcome this barrier, we developed SCoPE2. It substantially increases quantitative accuracy and throughput while lowering cost and hands-on time by introducing automated and miniaturized sample preparation. These advances enabled us to analyze the emergence of cellular heterogeneity as homogeneous monocytes differentiated into macrophage-like cells in the absence of polarizing cytokines. SCoPE2 quantified over 3,042 proteins in 1,490 single monocytes and macrophages in ten days of instrument time, and the quantified proteins allowed us to discern single cells by cell type. Furthermore, the data uncovered a continuous gradient of proteome states for the macrophage-like cells, suggesting that macrophage heterogeneity may emerge even in the absence of polarizing cytokines. Parallel measurements of transcripts by 10x Genomics scRNA-seq suggest that our measurements sampled 20-fold more protein copies than RNA copies per gene, and thus SCoPE2 supports quantification with improved count statistics. Joint analysis of the data illustrates how variability across single cells can reveal transcriptional and post-transcriptional gene regulation. Our methodology lays the foundation for automated and quantitative single-cell analysis of proteins by mass-spectrometry.
+Mass-spectrometry offers powerful methods for protein analysis, but their throughput remains limited. It can be increased by analyzing multiple peptides simultaneously, as afforded by data independent acquisition (DIA), and by analyzing multiple samples simultaneously, as afforded by multiplexing methods. Combining these two strategies has the potential to increase throughput multiplicatively with the number of labels. Here we introduce plexDIA, a universal method for sensitive and multiplexed DIA analysis. We demonstrate that 3-plex labeling of sub-microgram samples increases the number of quantitative protein ratios by about 3-fold, enabling the quantification of over 25,000 protein data points per hour of active gradient on a first-generation Q Exactive mass spectrometer.
 
 ------------
 
@@ -41,7 +35,7 @@ The fate and physiology of individual cells are controlled by proteins. Yet, our
 
 ## About the project
 
-plexDIA is a project developed in the [Slavov Laboratory](http://slavovlab.net) and [SCP Center](http://center.single-cell.net) at [Northeastern University](https://www.northeastern.edu/), and was authored by [Harrison Specht](http://harrisonspecht.com), [Ed Emmott](http://edemmott.co.uk/), [Aleksandra Petelski](http://slavovlab.net/people.htm), [R. Gray Huffman](http://slavovlab.net/people.htm), [David H Perlman](http://slavovlab.net/people.htm), Marco Serra, [Peter Kharchenko](http://pklab.med.harvard.edu/), [Toni Koller](http://slavovlab.net/people.htm), and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
+plexDIA is a project developed in the [Slavov Laboratory](http://slavovlab.net) at [Northeastern University](https://www.northeastern.edu/) in collaboration with Demichev and Rasler Laboratories at Charité, Universitätsmedizin. It was authored by [Jason Derks](https://slavovlab.net/people.htm), [Harrison Specht](http://harrisonspecht.com), [R. Gray Huffman](https://slavovlab.net/people.htm), [Markus Ralser](https://www.crick.ac.uk/research/labs/markus-ralser), [Vadim Demichev](https://github.com/vdemichev)  and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
 
 
 Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@northeastern.edu).
