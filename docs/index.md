@@ -7,12 +7,12 @@ permalink: /
 ---
 {% include social-media-links.html %}
 
-# **plexDIA**:
+# multi<u>plex</u>ed <u>DIA</u> **plexDIA**:
 
 {: .fs-9 }
 
-multi<u>plex</u>ed <u>DIA</u>
-{: .fs-6 .fw-300}
+
+<!-- {: .fs-6 .fw-300} -->
 
 ### Multiplexed data-independent acquisition (plexDIA) for increasing proteomics throughput
 
