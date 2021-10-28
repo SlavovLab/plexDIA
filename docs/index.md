@@ -10,11 +10,11 @@ permalink: /
 # multi<u>plex</u>ed <u>DIA</u>: *plexDIA*
 <!-- {: .fs-6 .fw-300}  {: .fs-9 } -->
 
+### Multiplexed data-independent acquisition for increasing proteomics throughput
+
 &nbsp;
 
-### Multiplexed data-independent acquisition (plexDIA) for increasing proteomics throughput
-
-[plexDIA Preprint](https://doi.org/10.1101/665307){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[plexDIA Preprint][plexDIA]{: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [plexDIA code on GitHub](https://github.com/SlavovLab/plxDIA){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ------------
@@ -28,16 +28,19 @@ Mass-spectrometry offers powerful methods for protein analysis, but their throug
 ------------
 
 
-## Perspectives
+## Perspectives on high-throughput multiplexed proteomics
+* [Increasing proteomics throughput](https://www.nature.com/articles/s41587-021-00881-z), *Nature Biotechnology*
 * [Driving Single Cell Proteomics Forward with Innovation](https://pubmed.ncbi.nlm.nih.gov/34597050/), *Journal of Proteome Research*
 
 
 
 ## About the project
 
-plexDIA is a project developed in the [Slavov Laboratory](http://slavovlab.net) at [Northeastern University](https://www.northeastern.edu/) in collaboration with Demichev and Rasler Laboratories at Charité, Universitätsmedizin. It was authored by [Jason Derks](https://slavovlab.net/people.htm), [Harrison Specht](http://harrisonspecht.com), [R. Gray Huffman](https://slavovlab.net/people.htm), [Markus Ralser](https://www.crick.ac.uk/research/labs/markus-ralser), [Vadim Demichev](https://github.com/vdemichev)  and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
+plexDIA is a project developed in the [Slavov Laboratory](http://slavovlab.net) at [Northeastern University](https://www.northeastern.edu/) in collaboration with Demichev and Rasler Laboratories at Charité, Universitätsmedizin. It was authored by [Jason Derks](https://slavovlab.net/people.htm), [Harrison Specht](http://harrisonspecht.com), [R. Gray Huffman](https://slavovlab.net/people.htm), [Markus Ralser](https://www.crick.ac.uk/research/labs/markus-ralser), [Vadim Demichev](https://github.com/vdemichev) and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
 
 
 Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@northeastern.edu).
 
 This project was supported by funding from the [NIH Director's Award](https://projectreporter.nih.gov/project_info_description.cfm?aid=9167004&icde=31336575) and by an [Allen Distinguished Investigator Award](https://alleninstitute.org/what-we-do/frontiers-group/distinguished-investigators/projects/tracking-proteome-dynamics-single-cells) from the Paul G. Allen Frontiers Group.
+
+[plexDIA]: https://doi.org/10.1101/665307 "Multiplexed data-independent acquisition by plexDIA"
