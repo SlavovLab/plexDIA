@@ -4,6 +4,7 @@ title: Download data
 nav_order: 2
 permalink: mass-spec/data
 description: "download single-cell proteomics data from SCoPE2, a second generation SCoPE-MS"
+nav_exclude: true
 ---
 {% include social-media-links.html %}
 

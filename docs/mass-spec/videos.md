@@ -1,8 +1,8 @@
 ---
 layout: default
-title: SCoPE2 videos
+title: Videos
 nav_order: 7
-description: "Video presentations on high-throughput data independent analysis, Northeastern University, Boston, MA"
+description: "Video presentations on high-throughput data independent analysis, Slavov Laboratory, Northeastern University, Boston, MA"
 permalink: mass-spec/videos
 
 ---
