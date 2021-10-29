@@ -1,0 +1,18 @@
+paper:
+  id: '10.1186/s13059-021-02267-5'
+  href: 'https://doi.org/'
+  title: 'Paper'
+  fa-icon: 'fa-book'
+
+data:
+  id: 'data'
+  href: 'https://scope2.slavovlab.net/docs/'
+  title: 'Data'
+  fa-icon: 'fa-database'
+
+
+github:
+  id: 'SCoPE2'
+  href: 'https://github.com/SlavovLab/'
+  title: 'GitHub'
+  fa-icon: 'fa-github-square'
