@@ -33,7 +33,7 @@ search_enabled: true
 #    - "https://github.com/SlavovLab/SCoPE2"
 
 aux_links:
-  "plxDIA Paper":
+  "plexDIA Preprint":
     - "https://plexdia.slavovlab.net/#about-the-project"
   "Slavov Lab":
     - "https://slavovlab.net"
