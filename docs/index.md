@@ -10,12 +10,14 @@ permalink: /
 # multi<u>plex</u>ed <u>DIA</u>: *plexDIA*
 <!-- {: .fs-6 .fw-300}  {: .fs-9 } -->
 
-### Multiplexed data-independent acquisition for increasing proteomics throughput
+## Increasing the throughput of sensitive proteomics by plexDIA
 
 &nbsp;
 
+<!--
 [plexDIA Preprint][plexDIA]{: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [plexDIA code on GitHub](https://github.com/SlavovLab/plxDIA){: .btn .fs-5 .mb-4 .mb-md-0 }
+-->
 
 ------------
 
@@ -23,9 +25,11 @@ Mass-spectrometry offers powerful methods for protein analysis, but their throug
 
 ------------
 
+<!--
 ![]({{site.baseurl}}/assets/images/SCOPE2-ac.png){: width="100%" .center-image}
 
 ------------
+-->
 
 
 ## Perspectives on high-throughput multiplexed proteomics
@@ -43,4 +47,4 @@ Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@nor
 
 This project was supported by funding from the [NIH Director's Award](https://projectreporter.nih.gov/project_info_description.cfm?aid=9167004&icde=31336575) and by an [Allen Distinguished Investigator Award](https://alleninstitute.org/what-we-do/frontiers-group/distinguished-investigators/projects/tracking-proteome-dynamics-single-cells) from the Paul G. Allen Frontiers Group.
 
-[plexDIA]: https://doi.org/10.1101/665307 "Multiplexed data-independent acquisition by plexDIA"
+[plexDIA]: https://plexdia.slavovlab.net/#about-the-project "Multiplexed data-independent acquisition by plexDIA"
