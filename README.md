@@ -8,7 +8,7 @@
 * [Download data](https://plexDIA.slavovlab.net/mass-spec/data)
 * [Preprint](https://www.biorxiv.org/content/10.1101/665307v3)
 
-<img src="https://scope2.slavovlab.net/assets/images/SCOPE2-ac.png" width="70%">
+<img src="https://plexDIA.slavovlab.net/mass-spec/Figures/plexDIA.png" width="70%">
 
 
 

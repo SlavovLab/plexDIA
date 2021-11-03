@@ -21,15 +21,15 @@ permalink: /
 
 ------------
 
-Mass-spectrometry offers powerful methods for protein analysis, but their throughput remains limited. It can be increased by analyzing multiple peptides simultaneously, as afforded by data independent acquisition (DIA), and by analyzing multiple samples simultaneously, as afforded by multiplexing methods. Combining these two strategies has the potential to increase throughput multiplicatively with the number of labels. Here we introduce plexDIA, a universal method for sensitive and multiplexed DIA analysis. We demonstrate that 3-plex labeling of sub-microgram samples increases the number of quantitative protein ratios by about 3-fold, enabling the quantification of over 25,000 protein data points per hour of active gradient on a first-generation Q Exactive mass spectrometer.
+Current mass-spectrometry methods enable high-throughput proteomics of large sample amounts, but proteomics of low sample amounts remains limited in depth and throughput. We aimed to increase throughput for analyzing limited samples while achieving high proteome coverage and quantitative accuracy. We developed a general experimental and computational framework, plexDIA, for simultaneously multiplexing the analysis of both peptides and samples. Multiplexed analysis with plexDIA increases throughput multiplicatively with the number of labels without reducing proteome coverage or quantitative accuracy. Specifically, plexDIA using 3-plex nonisobaric mass tags enables quantifying 3-fold more protein ratios among nanogram-level samples. Using 1 hour active gradients and first-generation Q Exactive, plexDIA quantified about 8,000 proteins in each sample of labeled 3-plex sets. Furthermore, plexDIA increases the consistency of protein quantification, resulting in over 2-fold reduction of missing data across samples. We applied plexDIA to quantify proteome dynamics during the cell division cycle in cells isolated based on their DNA content. The high sensitivity and accuracy of plexDIA detected many classical cell cycle proteins and discovered new ones. These results establish a general framework for increasing the throughput of highly sensitive and quantitative protein analysis.  
 
 ------------
 
-<!--
-![]({{site.baseurl}}/assets/images/SCOPE2-ac.png){: width="100%" .center-image}
+
+![plexDIA: Multiplexed data-independent acquisition for increasing proteomics throughput]({{site.baseurl}}/mass-spec/Figures/plexDIA.png){: width="100%" .center-image}
 
 ------------
--->
+
 
 
 ## Perspectives on high-throughput multiplexed proteomics
@@ -47,4 +47,5 @@ Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@nor
 
 This project was supported by funding from the [NIH Director's Award](https://projectreporter.nih.gov/project_info_description.cfm?aid=9167004&icde=31336575) and by an [Allen Distinguished Investigator Award](https://alleninstitute.org/what-we-do/frontiers-group/distinguished-investigators/projects/tracking-proteome-dynamics-single-cells) from the Paul G. Allen Frontiers Group.
 
-[plexDIA]: https://plexdia.slavovlab.net/#about-the-project "Multiplexed data-independent acquisition by plexDIA"
+
+[plexDIA]: preprint_link "Multiplexed data-independent acquisition by plexDIA"
