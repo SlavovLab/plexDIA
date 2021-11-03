@@ -15,9 +15,8 @@ permalink: /
 &nbsp;
 
 
-[plexDIA Preprint][plexDIA]{: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }<!--
+[plexDIA Preprint][plexDIA]{: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [plexDIA code on GitHub](https://github.com/SlavovLab/plxDIA){: .btn .fs-5 .mb-4 .mb-md-0 }
--->
 
 ------------
 
