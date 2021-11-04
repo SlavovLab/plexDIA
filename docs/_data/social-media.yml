@@ -18,9 +18,10 @@ paper:
 
 data:
   id: 'data'
-  href: 'https://plexdia.slavovlab.net/mass-spec/
+  href: 'https://plexdia.slavovlab.net/mass-spec/'
   title: 'Data'
   fa-icon: 'fa-database'
+
 
 github:
   id: 'plexDIA'
