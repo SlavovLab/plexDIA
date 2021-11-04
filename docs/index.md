@@ -15,8 +15,8 @@ permalink: /
 &nbsp;
 
 
-[plexDIA Preprint][plexDIA]{: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[plexDIA code on GitHub](https://github.com/SlavovLab/plxDIA){: .btn .fs-5 .mb-4 .mb-md-0 }
+[plexDIA Preprint][plexDIA_Article]{: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[plexDIA code on GitHub](plexDIA_Code){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ------------
 
@@ -47,4 +47,5 @@ Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@nor
 This project was supported by funding from the [NIH Director's Award](https://projectreporter.nih.gov/project_info_description.cfm?aid=9167004&icde=31336575) and by an [Allen Distinguished Investigator Award](https://alleninstitute.org/what-we-do/frontiers-group/distinguished-investigators/projects/tracking-proteome-dynamics-single-cells) from the Paul G. Allen Frontiers Group.
 
 
-[plexDIA]: preprint_link "Multiplexed data-independent acquisition by plexDIA"
+[plexDIA_Article]: preprint_link "Multiplexed data-independent acquisition by plexDIA"
+[plexDIA_Code]: github_link "plexDIA data analysis pipeline repository"
