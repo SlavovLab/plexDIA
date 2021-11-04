@@ -18,7 +18,7 @@ nav_exclude: false
 &nbsp;
 
 <h2 style="letter-spacing: 2px; font-size: 26px;" id="plexDIA-data" >plexDIA data organized by experiments</h2>
-All RAW and processed data from the [plexDIA article](plexDIA_Article) are organized in this [directory](https://drive.google.com/drive/u/1/folders/1Ql6RnhoRKJx96lG3oqlgOWxqUxdB72Gp).   
+All RAW and processed data from the [plexDIA article][plexDIA_Article] are organized in this [directory](https://drive.google.com/drive/u/1/folders/1Ql6RnhoRKJx96lG3oqlgOWxqUxdB72Gp).   
 
 
 
