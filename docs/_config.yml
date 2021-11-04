@@ -34,7 +34,7 @@ search_enabled: true
 
 aux_links:
   "plexDIA Preprint":
-    - "https://doi.org/10.1101/2021.11.04.467007"
+    - "https://doi.org/10.1101/2021.11.03.467007"
   "Slavov Lab":
     - "https://slavovlab.net"
   "SCP Center":
@@ -43,7 +43,7 @@ aux_links:
 
 
 github_link: https://github.com/SlavovLab/plexDIA
-preprint_link: https://doi.org/10.1101/2021.11.04.467007
+preprint_link: https://doi.org/10.1101/2021.11.03.467007
 
 
 # Color scheme currently only supports "dark" or nil (default)

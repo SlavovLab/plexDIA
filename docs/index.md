@@ -47,5 +47,5 @@ Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@nor
 This project was supported by funding from the [NIH Director's Award](https://projectreporter.nih.gov/project_info_description.cfm?aid=9167004&icde=31336575) and by an [Allen Distinguished Investigator Award](https://alleninstitute.org/what-we-do/frontiers-group/distinguished-investigators/projects/tracking-proteome-dynamics-single-cells) from the Paul G. Allen Frontiers Group.
 
 
-[plexDIA_Article]: https://doi.org/10.1101/2021.11.04.467007 "Multiplexed data-independent acquisition by plexDIA"
+[plexDIA_Article]: https://doi.org/10.1101/2021.11.03.467007 "Multiplexed data-independent acquisition by plexDIA"
 [plexDIA_Code]: https://github.com/SlavovLab/plexDIA "plexDIA data analysis pipeline repository"
