@@ -4,7 +4,6 @@ twitter:
   title: 'Twitter'
   fa-icon: 'fa-twitter-square'
 
-
 youtube:
   id: 'NikolaiSlavovResearch'
   href: 'https://www.youtube.com/c/'
@@ -22,7 +21,6 @@ data:
   href: 'https://plexdia.slavovlab.net/mass-spec/
   title: 'Data'
   fa-icon: 'fa-database'
-
 
 github:
   id: 'plexDIA'
