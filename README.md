@@ -6,7 +6,7 @@
 
 * [Website](https://plexDIA.slavovlab.net)
 * [Download data](https://plexDIA.slavovlab.net/mass-spec/data)
-* [Preprint](https://www.biorxiv.org/content/10.1101/665307v3)
+* [Preprint](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v1)
 
 <img src="https://plexDIA.slavovlab.net/mass-spec/Figures/plexDIA.png" width="70%">
 
@@ -14,7 +14,7 @@
 
 ### Requirements
 
-This application has been tested on R >= 3.5.0, OSX 10.14 / Windows 7/8/10. R can be downloaded from the main [R Project page](https://www.r-project.org/) or downloaded with the [RStudio Application](https://www.rstudio.com/products/rstudio/download/). All modules are maintained for MaxQuant >= 1.6.0.16.
+This application has been tested on R >= 3.5.0, OSX 10.14 / Windows 7/8/10. R can be downloaded from the main [R Project page](https://www.r-project.org/) or downloaded with the [RStudio Application](https://www.rstudio.com/products/rstudio/download/).
 
 
 
@@ -28,9 +28,9 @@ DO-MS is a project...
 
 The manuscript for this tool is published at the Journal of Proteome Research: [https://pubs.acs.org/doi/10.1021/acs.jproteome.9b00039](https://pubs.acs.org/doi/10.1021/acs.jproteome.9b00039)
 -->
-The manuscript is freely available on bioRxiv: [Derks et al., 2021](https://www.biorxiv.org/content/10.1101/665307v3)
+The manuscript is freely available on bioRxiv: [Derks et al., 2021](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v1)
 
-Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@northeastern.edu).
+For more information, contact [Slavov Laboratory](https://slavovlab.net) or directly [Prof. Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/)
 
 ### License
 
