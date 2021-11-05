@@ -8,17 +8,17 @@ permalink: mass-spec/videos
 ---
 {% include social-media-links.html %}
 
-# Videos on high-throughput DIA proteomics
+# Videos on high-throughput multiplexed DIA proteomics
 
 &nbsp;
 
-
+## plexDIA presentations  
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LDd5B_x4JPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 &nbsp;
 
 &nbsp;
-
+## Presentations on high-throughput DIA proteomics
 The presentations below were recorded at the [Single-Cell proteomics Conference](http://single-cell.net).
 
 
