@@ -2,13 +2,14 @@
 layout: default
 title: Videos
 nav_order: 7
-description: "Video presentations on high-throughput and sensitive protein analysis by multiplexed data independent acquisition, Slavov Laboratory, Northeastern University, Boston, MA"
+description: "Video presentations on high-throughput and sensitive protein analysis by multiplexed data independent acquisition (plexDIA), Slavov Laboratory, Northeastern University, Boston, MA"
 permalink: mass-spec/videos
 
 ---
 {% include social-media-links.html %}
 
-# Videos on high-throughput multiplexed DIA proteomics
+# Videos
+## High-throughput multiplexed DIA proteomics
 
 &nbsp;
 
