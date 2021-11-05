@@ -2,7 +2,7 @@
 layout: default
 title: Videos
 nav_order: 7
-description: "Video presentations on high-throughput data independent analysis, Slavov Laboratory, Northeastern University, Boston, MA"
+description: "Video presentations on high-throughput and sensitive protein analysis by multiplexed data independent acquisition, Slavov Laboratory, Northeastern University, Boston, MA"
 permalink: mass-spec/videos
 
 ---
@@ -10,7 +10,16 @@ permalink: mass-spec/videos
 
 # Videos on high-throughput DIA proteomics
 
-These presentations were recorded at the 2021 [Single-Cell proteomics Conference](http://single-cell.net).
+&nbsp;
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LDd5B_x4JPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+&nbsp;
+
+&nbsp;
+
+The presentations below were recorded at the [Single-Cell proteomics Conference](http://single-cell.net).
 
 
 
