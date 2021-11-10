@@ -14,8 +14,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: plexDIA
-long_title: Multiplexed data-independent acquisition: plexDIA
-description: Sensitive, accurate and high-throughput proteomics by multiplexed data-independent acquisition (plexDIA). plexDIA for increasing proteomics throughput | Slavov Laboratory and single-cell proteomics center
+long_title: "Multiplexed data-independent acquisition: plexDIA"
+description: "Sensitive, accurate and high-throughput proteomics by multiplexed data-independent acquisition (plexDIA). plexDIA for increasing proteomics throughput | Slavov Laboratory and single-cell proteomics center"
 baseurl: ~ # the subpath of your site, e.g. /blog
 url: https://plexDIA.slavovlab.net # the base hostname & protocol for your site
 
