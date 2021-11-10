@@ -3,7 +3,7 @@ layout: default
 title: Download data
 nav_order: 2
 permalink: mass-spec/data
-description: "download multiplexed DIA data from plexDIA"
+description: "plexDIA data, algorithms and workflows: Download multiplexed DIA data from plexDIA"
 nav_exclude: false
 ---
 {% include social-media-links.html %}

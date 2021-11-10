@@ -2,7 +2,8 @@
 layout: default
 title: Home
 nav_order: 1
-description: "plexDIA: Multiplexed data-independent acquisition for increasing proteomics throughput"
+long_title: Multiplexed data-independent acquisition: plexDIA
+description: Sensitive, accurate and high-throughput proteomics by multiplexed data-independent acquisition (plexDIA). plexDIA for increasing proteomics throughput | Slavov Laboratory and single-cell proteomics center
 permalink: /
 ---
 {% include social-media-links.html %}
