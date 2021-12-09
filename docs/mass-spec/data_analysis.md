@@ -24,6 +24,8 @@ Searching [plexDIA][plexDIA_Article] data with DIA-NN is described in this [tuto
 
 &nbsp;
 
+[Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
+
 
 &nbsp;  
 
