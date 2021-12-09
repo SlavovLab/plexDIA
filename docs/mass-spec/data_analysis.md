@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Download data
-nav_order: 2
+title: Data Analysis
+nav_order: 3
 permalink: mass-spec/plexDIA_analysis
 description: "plexDIA data searching and analysis: Tutorial on searching and analyzing multiplexed DIA data from plexDIA"
 nav_exclude: false
