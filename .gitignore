@@ -1,0 +1,4 @@
+*.DS_Store
+.DS_Store
+index_files/*.DS_Store
+index_files/.DS_Store
