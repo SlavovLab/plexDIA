@@ -35,6 +35,7 @@ Current mass-spectrometry methods enable high-throughput proteomics of large sam
 ## Perspectives on high-throughput multiplexed proteomics
 * [Increasing proteomics throughput](https://www.nature.com/articles/s41587-021-00881-z), *Nature Biotechnology*
 * [Driving Single Cell Proteomics Forward with Innovation](https://pubmed.ncbi.nlm.nih.gov/34597050/), *Journal of Proteome Research*
+* [Scaling up single-cell proteomics](https://doi.org/10.1016/j.mcpro.2021.100179), *Molecular and Cellular Proteomics*
 
 
 
