@@ -25,7 +25,7 @@ This application has been tested on R >= 3.5.0, OSX 10.14 / Windows 7/8/10. R ca
 
 ## Reproducing the analysis
 
-The main function is [plexDIA_Functions.R](https://github.com/SlavovLab/plexDIA/blob/main/code/plexDIA_Functions.R), and it uses the other functions in the [code directory](https://github.com/SlavovLab/plexDIA/blob/main/code/p).  
+The main function is [plexDIA_Functions.R](https://github.com/SlavovLab/plexDIA/blob/main/code/plexDIA_Functions.R), and it uses the other functions in the [code directory](https://github.com/SlavovLab/plexDIA/blob/main/code).  
 
 
 A. We have three main DATA directories which contain raw data files, DIA-NN reports, and data analysis results for each topic covered in the plexDIA paper:
