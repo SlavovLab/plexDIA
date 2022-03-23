@@ -8,6 +8,9 @@
 * [Single-cell plexDIA Website](https://scp.slavovlab.net/plexDIA) | [Download data](https://scp.slavovlab.net/Derks_et_al_2022)
 * [Preprint](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v2)
 
+
+&nbsp;
+
 <img src="https://scp.slavovlab.net/Figs/plexDIA_4.png" width="70%">
 
 
@@ -69,7 +72,7 @@ DO-MS is a project...
 
 The manuscript for this tool is published at the Journal of Proteome Research: [https://pubs.acs.org/doi/10.1021/acs.jproteome.9b00039](https://pubs.acs.org/doi/10.1021/acs.jproteome.9b00039)
 -->
-The manuscript is freely available on bioRxiv: [Derks et al., 2021](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v2)
+The manuscript is freely available on bioRxiv: [Derks et al., 2022 (version 2)](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v2)
 
 For more information, contact [Slavov Laboratory](https://slavovlab.net) or directly [Prof. Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/)
 
