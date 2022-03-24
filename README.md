@@ -4,11 +4,14 @@
 <!--![GitHub release](https://img.shields.io/github/release/SlavovLab/DO-MS.svg)-->
 ![GitHub](https://img.shields.io/github/license/SlavovLab/DO-MS.svg)
 
-* [Website](https://plexDIA.slavovlab.net)
-* [Download data](https://plexDIA.slavovlab.net/mass-spec/data)
-* [Preprint](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v1)
+* [Bulk plexDIA Website](https://plexDIA.slavovlab.net) &nbsp; | &nbsp; [Download data](https://plexDIA.slavovlab.net/mass-spec/data)
+* [Single-cell plexDIA Website](https://scp.slavovlab.net/plexDIA) &nbsp; | &nbsp; [Download data](https://scp.slavovlab.net/Derks_et_al_2022)
+* [Preprint](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v2)
 
-<img src="https://plexDIA.slavovlab.net/mass-spec/Figures/plexDIA.png" width="70%">
+
+&nbsp;
+
+<img src="https://scp.slavovlab.net/Figs/plexDIA_4.png" width="70%">
 
 
 
@@ -20,6 +23,21 @@ This application has been tested on R >= 3.5.0, OSX 10.14 / Windows 7/8/10. R ca
 
 ------------
 
+## Reproducing the data analysis
+
+
+1. Download all the data reports from the "search" section of MassIVE [MSV000089093](https://massive.ucsd.edu/ProteoSAFe/dataset.jsp?task=ae918c7ce5a94a4abd2c6b54a3806c9e).
+
+2. Download the two meta files from the "metadata" section of MassIVE (specifically, "[Meta_SingleCell.tsv](https://massive.ucsd.edu/ProteoSAFe/DownloadResultFile?file=f.MSV000089093/updates/2022-03-23_jderks_10a27189/metadata/Meta_SingleCell.tsv&forceDownload=true)" and "[Meta_Bulk_benchmarking.tsv](https://massive.ucsd.edu/ProteoSAFe/DownloadResultFile?file=f.MSV000089093/updates/2022-03-23_jderks_10a27189/metadata/Meta_Bulk_benchmarking.tsv&forceDownload=true)") [MSV000089093](https://massive.ucsd.edu/ProteoSAFe/dataset.jsp?task=ae918c7ce5a94a4abd2c6b54a3806c9e).
+
+3. Create a new R project, and copy the .Rmd, .R, and .txt files from the Code section (https://github.com/SlavovLab/plexDIA) to it. Note: The main functions are in [plexDIA_Functions.R](https://github.com/SlavovLab/plexDIA/blob/main/code/plexDIA_Functions.R), but it uses the other functions in the [code directory](https://github.com/SlavovLab/plexDIA/blob/main/code), so please download all.
+
+4. Please update the file paths in the .Rmd.
+
+5. Run!
+
+
+
 ## About the project
 
 <!--
@@ -28,7 +46,7 @@ DO-MS is a project...
 
 The manuscript for this tool is published at the Journal of Proteome Research: [https://pubs.acs.org/doi/10.1021/acs.jproteome.9b00039](https://pubs.acs.org/doi/10.1021/acs.jproteome.9b00039)
 -->
-The manuscript is freely available on bioRxiv: [Derks et al., 2021](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v1)
+The manuscript is freely available on bioRxiv: [Derks et al., 2022 (version 2)](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v2)
 
 For more information, contact [Slavov Laboratory](https://slavovlab.net) or directly [Prof. Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/)
 
