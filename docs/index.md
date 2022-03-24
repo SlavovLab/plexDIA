@@ -26,7 +26,8 @@ Current mass-spectrometry methods enable high-throughput proteomics of large sam
 ------------
 
 
-![plexDIA: Multiplexed data-independent acquisition for increasing proteomics throughput](https://scp.slavovlab.net/Figs/plexDIA_4.png){: width="100%" .center-image}
+[![plexDIA: Multiplexed data-independent acquisition for increasing proteomics throughput](https://scp.slavovlab.net/Figs/plexDIA_4.png){: width="100%" .center-image}](https://scp.slavovlab.net/plexDIA)
+
 
 ------------
 
