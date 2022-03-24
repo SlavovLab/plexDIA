@@ -12,7 +12,7 @@ nav_exclude: false
 
 &nbsp;
 
-[&nbsp;
+&nbsp;
 
 [plexDIA Data]({{site.baseurl}}#plexDIA-data){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [plexDIA @ massIVE]({{site.baseurl}}#RAW-data){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
@@ -21,9 +21,10 @@ nav_exclude: false
 &nbsp;
 
 <h2 style="letter-spacing: 2px; font-size: 26px;" id="plexDIA-data" >plexDIA data organized by experiments</h2>
-All RAW and processed data from the [plexDIA article][plexDIA_Article] are organized in this [directory](https://drive.google.com/drive/u/1/folders/1Ql6RnhoRKJx96lG3oqlgOWxqUxdB72Gp).
+All RAW and processed data from the [plexDIA article][plexDIA_Article] are organized in this [directory](https://drive.google.com/drive/u/1/folders/1Ql6RnhoRKJx96lG3oqlgOWxqUxdB72Gp). Below are links to processed data from single cells, cells isolated based in DNA content (cell cycle phases) and from LFQ-bench style benchmarking experiments.
+ 
 
- * Processed [single-cell data](https://drive.google.com/drive/folders/1pUC2zgXKtKYn22mlor0lmUDK0frgwL_-?usp=sharing)  
+ * Processed [single-cell data](https://drive.google.com/drive/folders/1pUC2zgXKtKYn22mlor0lmUDK0frgwL_-?usp=sharing)  | [single-cell website](https://scp.slavovlab.net/Derks_et_al_2022)
 
  * Proteins x single cells [data matrix](https://drive.google.com/file/d/1_qztwEM3OxS5R6A6-N1Ai_vs60tWDLtE/view?usp=sharing)
 
