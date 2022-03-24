@@ -21,9 +21,17 @@ nav_exclude: false
 &nbsp;
 
 <h2 style="letter-spacing: 2px; font-size: 26px;" id="plexDIA-data" >plexDIA data organized by experiments</h2>
-All RAW and processed data from the [plexDIA article][plexDIA_Article] are organized in this [directory](https://drive.google.com/drive/u/1/folders/1Ql6RnhoRKJx96lG3oqlgOWxqUxdB72Gp).   
+All RAW and processed data from the [plexDIA article][plexDIA_Article] are organized in this [directory](https://drive.google.com/drive/u/1/folders/1Ql6RnhoRKJx96lG3oqlgOWxqUxdB72Gp).
+
+ * Processed [single-cell data](https://drive.google.com/drive/folders/1pUC2zgXKtKYn22mlor0lmUDK0frgwL_-?usp=sharing)  
 
  * Proteins x single cells [data matrix](https://drive.google.com/file/d/1_qztwEM3OxS5R6A6-N1Ai_vs60tWDLtE/view?usp=sharing)
+
+ * Processed [cell division cycle data](https://drive.google.com/drive/folders/1xJ5ewZj-JNry36UBOMJHVn6-QolwXkZV?usp=sharingg)
+
+ * Processed [benchmarking data](https://drive.google.com/drive/folders/1WwCOfQtvxNsT-tdR88kbwaglm1xYiqWh?usp=sharing)
+
+
 
 
 &nbsp;
