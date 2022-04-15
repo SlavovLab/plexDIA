@@ -13,7 +13,7 @@ nav_exclude: false
 &nbsp;
 
 &nbsp;
-Searching [plexDIA][plexDIA_Article] data with DIA-NN is described in this [tutorial](https://youtu.be/0Wmg9LjDtgE).
+Searching [plexDIA][plexDIA_Article] data with [DIA-NN](https://github.com/vdemichev/DiaNN/releases/tag/1.8.1) is described in this [tutorial](https://youtu.be/0Wmg9LjDtgE).
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0Wmg9LjDtgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
