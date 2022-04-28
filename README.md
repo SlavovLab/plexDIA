@@ -30,7 +30,7 @@ This application has been tested on R >= 3.5.0, OSX 10.14 / Windows 7/8/10. R ca
 
 2. Download the two meta files from the "metadata" section of MassIVE (specifically, "[Meta_SingleCell.tsv](https://massive.ucsd.edu/ProteoSAFe/DownloadResultFile?file=f.MSV000089093/updates/2022-03-23_jderks_10a27189/metadata/Meta_SingleCell.tsv&forceDownload=true)" and "[Meta_Bulk_benchmarking.tsv](https://massive.ucsd.edu/ProteoSAFe/DownloadResultFile?file=f.MSV000089093/updates/2022-03-23_jderks_10a27189/metadata/Meta_Bulk_benchmarking.tsv&forceDownload=true)") [MSV000089093](https://massive.ucsd.edu/ProteoSAFe/dataset.jsp?task=ae918c7ce5a94a4abd2c6b54a3806c9e).
 
-3. Create a new R project, and copy the .Rmd, .R, and .txt files from the Code section (https://github.com/SlavovLab/plexDIA) to it. Note: The main functions are in [plexDIA_Functions.R](https://github.com/SlavovLab/plexDIA/blob/main/code/plexDIA_Functions.R), but it uses the other functions in the [code directory](https://github.com/SlavovLab/plexDIA/blob/main/code), so please download all.
+3. Create a new R project, and copy the .Rmd, .R, .py, and .txt files from the Code section (https://github.com/SlavovLab/plexDIA) to it. Note: The main functions are in [plexDIA_Functions.R](https://github.com/SlavovLab/plexDIA/blob/main/code/plexDIA_Functions.R), but it uses the other functions in the [code directory](https://github.com/SlavovLab/plexDIA/blob/main/code), so please download all.
 
 4. Please update the file paths in the .Rmd.
 
