@@ -24,11 +24,17 @@ Searching [plexDIA data](https://scp.slavovlab.net/Derks_et_al_2022) with [DIA-N
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0Wmg9LjDtgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+&nbsp;
+
+[Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
+
 -------
 
 &nbsp;
 
-&nbsp; 
+&nbsp;
+
+[Detailed methods](https://www.nature.com/articles/s41587-022-01389-w#Sec12) can be found at:
 
 Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensitive proteomics by plexDIA. *Nat Biotechnol* (2022). [10.1038/s41587-022-01389-w][plexDIA_Nature],  [Preprint][plexDIA_Article]
 
@@ -38,9 +44,7 @@ Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensiti
 [plexDIA_Nature]: https://doi.org/10.1038/s41587-022-01389-w "Derks, J., Slavov, N. et al. Increasing the throughput of sensitive proteomics by plexDIA. Nat Biotechnol (2022)"
 [plexDIA_Code]: https://github.com/SlavovLab/plexDIA "plexDIA data analysis pipeline, GitHub repository from the Slavov Laboratory"
 
-&nbsp;
 
-[Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
 
 
 &nbsp;  
