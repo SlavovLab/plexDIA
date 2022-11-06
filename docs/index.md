@@ -24,7 +24,8 @@ permalink: /
 Current mass-spectrometry methods enable high-throughput proteomics of large sample amounts, but proteomics of low sample amounts remains limited in depth and throughput. To increase the throughput of sensitive proteomics, we developed an experimental and computational framework, [plexDIA][plexDIA_Nature], for simultaneously multiplexing the analysis of both peptides and samples. Multiplexed analysis with plexDIA increases throughput multiplicatively with the number of labels without reducing proteome coverage or quantitative accuracy. By using 3-plex nonisobaric mass tags, plexDIA enables quantifying 3-fold more protein ratios among nanogram-level samples. Using 1 hour active gradients and first-generation Q Exactive, plexDIA quantified about 8,000 proteins in each sample of labeled 3-plex sets. plexDIA also increases data completeness, reducing missing data over 2-fold across samples. When applied to single human cells, plexDIA quantified about 1,000 proteins per cell and achieved 98 % data completeness within a plexDIA set while using about 5 min of active chromatography per cell. These results establish a general framework for increasing the throughput of sensitive and quantitative protein analysis.
 
 
-Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensitive proteomics by plexDIA. *Nat Biotechnol* (2022). [10.1038/s41587-022-01389-w][plexDIA_Nature],  [Preprint][plexDIA_Article]
+* Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensitive proteomics by plexDIA. *Nat Biotechnol* (2022). [10.1038/s41587-022-01389-w][plexDIA_Nature],  [Preprint][plexDIA_Article]
+* Derks, J., Slavov N., [Strategies for increasing the depth and throughput of protein analysis by plexDIA](https://www.biorxiv.org/content/10.1101/2022.11.05.515287v1),  [10.1101/2022.11.05.515287](https://doi.org/10.1101/2022.11.05.515287), [GitHub](https://github.com/SlavovLab/plexDIA_perspective)
 
 ------------
 
