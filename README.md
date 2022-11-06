@@ -7,6 +7,7 @@
 * [Bulk plexDIA Website](https://plexDIA.slavovlab.net) &nbsp; | &nbsp; [Download data](https://plexDIA.slavovlab.net/mass-spec/data)
 * [Single-cell plexDIA Website](https://scp.slavovlab.net/plexDIA) &nbsp; | &nbsp; [Download data](https://scp.slavovlab.net/Derks_et_al_2022)
 * [Preprint](https://www.biorxiv.org/content/10.1101/2021.11.03.467007v2) &nbsp; | &nbsp; [*Nature Biotechnology* Article](https://doi.org/10.1038/s41587-022-01389-w)
+* Perspective: Derks, J., Slavov N., Strategies for increasing the depth and throughput of protein analysis by plexDIA,  [10.1101/2022.11.05.515287](https://doi.org/10.1101/2022.11.05.515287), [GitHub](https://github.com/SlavovLab/plexDIA_perspective)
 
 
 &nbsp;
