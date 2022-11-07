@@ -25,7 +25,7 @@ Current mass-spectrometry methods enable high-throughput proteomics of large sam
 
 
 * Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensitive proteomics by plexDIA. *Nat Biotechnol* (2022). [10.1038/s41587-022-01389-w][plexDIA_Nature],  [Preprint][plexDIA_Article]
-* Derks, J., Slavov N., [Strategies for increasing the depth and throughput of protein analysis by plexDIA](https://www.biorxiv.org/content/10.1101/2022.11.05.515287v1),  *bioRxiv* (2022). [10.1101/2022.11.05.515287](https://doi.org/10.1101/2022.11.05.515287), [GitHub](https://github.com/SlavovLab/plexDIA_perspective)
+
 
 ------------
 
@@ -38,6 +38,7 @@ Current mass-spectrometry methods enable high-throughput proteomics of large sam
 
 
 ## Perspectives on high-throughput multiplexed proteomics
+* [Strategies for increasing the depth and throughput of protein analysis by plexDIA](https://www.biorxiv.org/content/10.1101/2022.11.05.515287v1)  *bioRxiv*
 * [Framework for multiplicative scaling of single-cell proteomics](https://www.nature.com/articles/s41587-022-01411-1), *Nature Biotechnology*
 * [Increasing proteomics throughput](https://www.nature.com/articles/s41587-021-00881-z), *Nature Biotechnology*
 * [Driving Single Cell Proteomics Forward with Innovation](https://pubmed.ncbi.nlm.nih.gov/34597050/), *Journal of Proteome Research*
@@ -47,7 +48,7 @@ Current mass-spectrometry methods enable high-throughput proteomics of large sam
 
 ## About the project
 
-plexDIA is a project developed in the [Slavov Laboratory](http://slavovlab.net) at [Northeastern University](https://www.northeastern.edu/) in collaboration with Demichev and Rasler Laboratories at Charité, Universitätsmedizin. It was authored by [Jason Derks](https://slavovlab.net/people.htm), [Andrew Leduc](http://andrewdleduc.com/), [Harrison Specht](http://harrisonspecht.com), [R. Gray Huffman](https://slavovlab.net/people.htm), [Markus Ralser](https://www.crick.ac.uk/research/labs/markus-ralser), [Vadim Demichev](https://github.com/vdemichev) and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
+plexDIA is a project developed in the [Slavov Laboratory](https://slavovlab.net) at [Northeastern University](https://www.northeastern.edu/) in collaboration with Demichev and Rasler Laboratories at Charité, Universitätsmedizin. It was authored by [Jason Derks](https://slavovlab.net/people.htm), [Andrew Leduc](http://andrewdleduc.com/), [Harrison Specht](http://harrisonspecht.com), [R. Gray Huffman](https://slavovlab.net/people.htm), [Markus Ralser](https://www.crick.ac.uk/research/labs/markus-ralser), [Vadim Demichev](https://github.com/vdemichev) and [Nikolai Slavov](https://coe.northeastern.edu/people/slavov-nikolai/).   
 
 
 Contact the authors by email: [nslavov\{at\}northeastern.edu](mailto:nslavov@northeastern.edu).
