@@ -1,0 +1,741 @@
+---
+title: "SC_plexDIA"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library
+```{r}
+
+library(eulerr)
+library(ggalt)
+library(ggbeeswarm)
+library(facetscales)
+library(OrgMassSpecR) #
+library(robustbase)
+library(plyr)
+library(reticulate) #
+library(stringi)
+library(stringr) #
+library(tidyr)
+library(patchwork)
+library(ggplot2) #
+library(reshape2) #
+library(Cairo)
+library(gridGraphics)
+library(data.table) #
+library(devtools)
+library(diann) #
+library(gridExtra)
+library(ggpubr)
+library(ggpointdensity)
+library(viridis)
+library(scales)
+library(matrixStats)
+library(dplyr) #
+library(sva)
+
+
+```
+
+functions
+```{r}
+
+source("functions_parameters.R")
+source_python("py_isoEnv.py")
+
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+
+#Quick data functions:
+pD_channel <- function(df){
+  
+  df <- df %>% dplyr::mutate("channel_name" = ifelse(grepl("-0|mTRAQ0", Modified.Sequence), "mTRAQ0",
+                                              ifelse(grepl("-4|mTRAQ4", Modified.Sequence), "mTRAQ4", "mTRAQ8")))
+  
+  return(df)
+}
+
+pD_seqcharge <- function(df){
+  df$seqcharge <- paste0(df$Modified.Sequence, df$Precursor.Charge)
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ0\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ-K-0\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ-n-0\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ4\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ-K-4\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ-n-4\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ8\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ-K-8\\)")
+  df$seqcharge <- str_remove_all(df$seqcharge, "\\(mTRAQ-n-8\\)")
+  return(df)
+}
+
+pD_Cterm <- function(df){
+  df$Cterm <- str_sub(df$Stripped.Sequence, -1, -1)
+  df <- df %>% dplyr::mutate("Cterm" = ifelse(grepl("K", Cterm), "K", "R"))
+}
+
+
+#Quant functions
+pD_isotopicCO <- function(df){
+  #df <- b7_1
+  
+  cnames <- colnames(df)
+  df <- pD_seqcharge(df)
+  df$seqcharge_run <- paste0(df$seqcharge, df$Run)
+  
+  mTRAQ0 <- list(C=7, H=12, N=2, O=1)
+  mTRAQ4 <- list(C=4, H=12, N=1, O=1)
+  mTRAQ8 <- list(C=1, H=12, N=0, O=1)
+  
+  
+  # count number of each mTRAQ label type per precursor:
+  df$d0 <- str_count(df$Modified.Sequence, "mTRAQ0|mTRAQ-K-0|mTRAQ-n-0")
+  df$d4 <- str_count(df$Modified.Sequence, "mTRAQ4|mTRAQ-K-4|mTRAQ-n-4")
+  df$d8 <- str_count(df$Modified.Sequence, "mTRAQ8|mTRAQ-K-8|mTRAQ-n-8")
+  
+  uni_prec <- df %>% dplyr::distinct(Modified.Sequence, .keep_all=T)
+  
+  deamid <- list(N=-1, H=-1, O=1)
+  ox <- list(O=1)
+  carba <- list(C=2, H=3, N=1, O=1)
+  
+  precs <- vector(mode = "list", length = nrow(uni_prec))
+  # get chemical formula for each peptide
+  for(i in 1:nrow(uni_prec)){
+    tempseq <- paste0(uni_prec$Stripped.Sequence[i])
+    modseq <- paste0(uni_prec$Modified.Sequence[i])
+    numLab_d0 <- uni_prec$d0[i]
+    numLab_d4 <- uni_prec$d4[i]
+    numLab_d8 <- uni_prec$d8[i]
+    
+    ## other modifications
+    d <- str_count(uni_prec$Precursor.Id[i], "UniMod:7")
+    o <- str_count(uni_prec$Precursor.Id[i], "UniMod:35")
+    c <- str_count(uni_prec$Precursor.Id[i], "UniMod:4")
+    
+    ch <- as.numeric(paste0(uni_prec$Precursor.Charge[i]))
+    el_temp <- ConvertPeptide(tempseq)
+    el_temp$C <- el_temp$C+(mTRAQ0$C*numLab_d0)+(mTRAQ4$C*numLab_d4)+(mTRAQ8$C*numLab_d8)+(carba$C*c)
+    el_temp$H <- el_temp$H+(mTRAQ0$H*numLab_d0)+(mTRAQ4$H*numLab_d4)+(mTRAQ8$H*numLab_d8)+(carba$H*c)
+    el_temp$N <- el_temp$N+(mTRAQ0$N*numLab_d0)+(mTRAQ4$N*numLab_d4)+(mTRAQ8$N*numLab_d8)+(carba$N*c)
+    el_temp$O <- el_temp$O+(mTRAQ0$O*numLab_d0)+(mTRAQ4$O*numLab_d4)+(mTRAQ8$O*numLab_d8)+(carba$O*c)
+    el_temp_df <- data.frame(el_temp)
+    rownames(el_temp_df) <- modseq
+    precs[[i]] <- el_temp_df
+  }
+  
+  iso_env_list <- vector(mode = "list", length = length(precs))
+  # calculate distribution of isotopic envelope
+  for(i in 1:length(precs)){
+    modseq <- rownames(data.frame(precs[i]))
+    temp <- as.numeric(data.frame(precs[i]))
+    iso <- iso_distr(temp)
+    iso_df <- data.frame(t(iso))
+    rownames(iso_df) <- modseq
+    iso_env_list[[i]] <- iso
+  }
+
+  #unlist into a dataframe
+  indx <- sapply(iso_env_list, length)
+  iso_env_df <- as.data.frame(do.call(rbind,lapply(iso_env_list, `length<-`,
+                                                   max(indx))))
+  colnames(iso_env_df) <- c(paste0("X", seq(1,ncol(iso_env_df), by =1)))
+  rnames <- uni_prec$Modified.Sequence
+  rownames(iso_env_df) <- rnames
+  iso_env_df[is.na(iso_env_df)] <- 0
+  all_carryOver <- iso_env_df %>% rowSums()
+  iso_env_df <- iso_env_df/all_carryOver  #get fraction of each peak 
+  iso_env_df$modseq <- rnames
+  
+  # Now join with the quantitative data, and correct for isotopic carryover
+  dat <- df %>% left_join(iso_env_df, by =c("Modified.Sequence" = "modseq"))
+  dat$num_labs <- dat$d0+dat$d4+dat$d8
+  dat <- pD_channel(dat)
+  dat <- dat %>% mutate("y" = (X5+X6)/(X1+X2+X5+X6))
+  d0_dat <- dat[grepl("mTRAQ0|mTRAQ-K-0|mTRAQ-n-0", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "num_labs", "Ms1.Area", "y") %>% dplyr::rename("d0"="Ms1.Area", "y1" = "y")
+  d4_dat <- dat[grepl("mTRAQ4|mTRAQ-K-4|mTRAQ-n-4", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "Ms1.Area", "y") %>% dplyr::rename("d4"="Ms1.Area", "y2" = "y")
+  d8_dat <- dat[grepl("mTRAQ8|mTRAQ-K-8|mTRAQ-n-8", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "Ms1.Area", "y") %>% dplyr::rename("d8"="Ms1.Area", "y3" = "y")
+  all_dat <- d0_dat %>% full_join(d4_dat, by =c("seqcharge_run" = "seqcharge_run")) %>%
+    full_join(d8_dat, by =c("seqcharge_run" = "seqcharge_run"))
+  all_dat$d0_iso <- all_dat$d0+all_dat$d0*all_dat$y1
+  all_dat$d4_iso <- all_dat$d4 - all_dat$d0*all_dat$y1 + all_dat$d4*all_dat$y2
+  all_dat$d8_iso <- all_dat$d8 - all_dat$d4*all_dat$y2 + all_dat$d8*all_dat$y3
+  #only do the isotopic correction for precursors with < 2 labels.. otherwise, the difference in mass is enough to avoid impactful isotopic carryover (such is the case with K-containing peptides).
+  all_dat <- all_dat %>% dplyr::mutate(d0_iso = ifelse(num_labs<2, d0_iso, d0)) 
+  all_dat <- all_dat %>% dplyr::mutate(d4_iso = ifelse(num_labs<2, d4_iso, d4)) 
+  all_dat <- all_dat %>% dplyr::mutate(d8_iso = ifelse(num_labs<2, d8_iso, d8)) 
+  all_dat$d0_iso[all_dat$d0_iso<0]<-0 #replace negatives with 0
+  all_dat$d4_iso[all_dat$d4_iso<0]<-0 #replace negatives with 0
+  all_dat$d8_iso[all_dat$d8_iso<0]<-0 #replace negatives with 0
+  all_dat_d0 <- all_dat %>% dplyr::select("seqcharge_run", "d0_iso") %>% dplyr::rename("Ms1.Area_iso" = "d0_iso") %>% na.omit()
+  all_dat_d4 <- all_dat %>% dplyr::select("seqcharge_run", "d4_iso")%>% dplyr::rename("Ms1.Area_iso" = "d4_iso") %>% na.omit()
+  all_dat_d8 <- all_dat %>% dplyr::select("seqcharge_run", "d8_iso")%>% dplyr::rename("Ms1.Area_iso" = "d8_iso") %>% na.omit()
+  d0_dat <- dat[grepl("mTRAQ0|mTRAQ-K-0|mTRAQ-n-0", dat$Modified.Sequence),]
+  d4_dat <- dat[grepl("mTRAQ4|mTRAQ-K-4|mTRAQ-n-4", dat$Modified.Sequence),]
+  d8_dat <- dat[grepl("mTRAQ8|mTRAQ-K-8|mTRAQ-n-8", dat$Modified.Sequence),]
+  
+  d0_dat <- d0_dat %>% left_join(all_dat_d0, by =c("seqcharge_run" = "seqcharge_run"))
+  d4_dat <- d4_dat %>% left_join(all_dat_d4, by =c("seqcharge_run" = "seqcharge_run"))
+  d8_dat <- d8_dat %>% left_join(all_dat_d8, by =c("seqcharge_run" = "seqcharge_run"))
+  dat <- rbind(d0_dat, d4_dat, d8_dat)
+  dat$Ms1.Area_iso[is.na(dat$Ms1.Area_iso)] <-0
+  dat <- dat %>% dplyr::select(all_of(cnames), "Ms1.Area_iso")
+  #b7_2 <- dat
+  return(dat)
+} #account for isotopic envelope 
+
+pD_isoCO_Ms1Ext <- function(df, Ms1Ext_df){
+  uni_runs <- unique(df$Run)
+  df <- pD_seqcharge(df)
+  df$seqcharge_run <- paste0(df$seqcharge, df$Run)
+  Ms1Ext_df <- pD_seqcharge(Ms1Ext_df)
+  Ms1Ext_df <- Ms1Ext_df %>% dplyr::select(-contains("Quality")) %>%
+    dplyr::select(-contains("decoy")) %>% dplyr::select(-contains("QValue"))
+  #Ms1Ext_df <- Ms1Ext_df[,!grepl("decoy", colnames(Ms1Ext_df))]
+  #Ms1Ext_df <- Ms1Ext_df[,!grepl("QValue", colnames(Ms1Ext_df))] #remove qvalue columns
+  #Ms1Ext_df <- Ms1Ext_df[,!grepl("Quality", colnames(Ms1Ext_df))] #remove qvalue columns
+  final_all <- data.frame(matrix(ncol = 6, nrow = 0))
+  colnames(final_all) <- c("Protein.Group", "Protein.Names", "Ms1.Extracted", "Precursor.Charge","seqcharge", "Run")
+  for(i in 1:length(uni_runs)){
+    temp <- Ms1Ext_df[,grepl(paste0(uni_runs[i],"|","Modified.Sequence","|","Stripped.Sequence","|","Protein.Group|seqcharge|Protein.Names|Precursor.Charge"), colnames(Ms1Ext_df))]
+    temp <- temp %>% dplyr::select(-contains("Quality"))
+    x <- substr(colnames(temp), nchar(colnames(temp)), nchar(colnames(temp)))
+    #d0
+    temp0 <- temp[,grepl("Precursor.Charge|Modified.Sequence|Stripped.Sequence|Protein.Group|seqcharge|Protein.Names|raw.0", colnames(temp))]
+    colnames(temp0) <- c("Protein.Group","Protein.Names", "Stripped.Sequence","Modified.Sequence", "Precursor.Charge","Ms1.Extracted", "seqcharge")
+    temp0$channel_name <- "mTRAQ0"
+    temp0$Modified.Sequence <- str_replace_all(temp0$Modified.Sequence, "\\(mTRAQ\\)","\\(mTRAQ0\\)")
+    temp0 <- na.omit(temp0)
+    #d4
+    temp4 <- temp[,grepl("Precursor.Charge|Modified.Sequence|Stripped.Sequence|Protein.Group|seqcharge|Protein.Names|raw.4", colnames(temp))]
+    colnames(temp4) <- c("Protein.Group","Protein.Names","Stripped.Sequence","Modified.Sequence","Precursor.Charge", "Ms1.Extracted", "seqcharge")
+    temp4$channel_name <- "mTRAQ4"
+    temp4$Modified.Sequence <- str_replace_all(temp4$Modified.Sequence, "\\(mTRAQ\\)","\\(mTRAQ4\\)")
+    temp4 <- na.omit(temp4)
+    #d8
+    temp8 <- temp[,grepl("Precursor.Charge|Modified.Sequence|Stripped.Sequence|Protein.Group|seqcharge|Protein.Names|raw.8", colnames(temp))]
+    colnames(temp8) <-  c("Protein.Group","Protein.Names","Stripped.Sequence","Modified.Sequence", "Precursor.Charge","Ms1.Extracted", "seqcharge")
+    temp8$channel_name <- "mTRAQ8"
+    temp8$Modified.Sequence <- str_replace_all(temp8$Modified.Sequence, "\\(mTRAQ\\)","\\(mTRAQ8\\)")
+    temp8 <- na.omit(temp8)
+    #combine
+    all_temp <- rbind(temp0,temp4,temp8)
+    all_temp$Run <- paste0(uni_runs[i])
+    final_all <- rbind(final_all, all_temp)
+  }
+  final_all$seqcharge_run <- paste0(final_all$seqcharge, final_all$Run)
+  cnames <- colnames(final_all)
+  mTRAQ0 <- list(C=7, H=12, N=2, O=1)
+  mTRAQ4 <- list(C=4, H=12, N=1, O=1)
+  mTRAQ8 <- list(C=1, H=12, N=0, O=1)
+  
+  
+  # count number of each mTRAQ label type per precursor:
+  final_all$d0 <- str_count(final_all$Modified.Sequence, "mTRAQ0|mTRAQ-K-0|mTRAQ-n-0")
+  final_all$d4 <- str_count(final_all$Modified.Sequence, "mTRAQ4|mTRAQ-K-4|mTRAQ-n-4")
+  final_all$d8 <- str_count(final_all$Modified.Sequence, "mTRAQ8|mTRAQ-K-8|mTRAQ-n-8")
+  
+  uni_prec <- final_all %>% dplyr::distinct(Modified.Sequence, .keep_all=T)
+  
+  deamid <- list(N=-1, H=-1, O=1)
+  ox <- list(O=1)
+  carba <- list(C=2, H=3, N=1, O=1)
+  
+  precs <- vector(mode = "list", length = nrow(uni_prec))
+  # get chemical formula for each peptide
+  for(i in 1:nrow(uni_prec)){
+    tempseq <- paste0(uni_prec$Stripped.Sequence[i])
+    modseq <- paste0(uni_prec$Modified.Sequence[i])
+    numLab_d0 <- uni_prec$d0[i]
+    numLab_d4 <- uni_prec$d4[i]
+    numLab_d8 <- uni_prec$d8[i]
+    
+    ## other modifications
+    d <- str_count(uni_prec$Modified.Sequence[i], "UniMod:7")
+    o <- str_count(uni_prec$Modified.Sequence[i], "UniMod:35")
+    c <- str_count(uni_prec$Modified.Sequence[i], "UniMod:4")
+    
+    # ch <- as.numeric(paste0(uni_prec$Precursor.Charge[i]))
+    el_temp <- ConvertPeptide(tempseq)
+    el_temp$C <- el_temp$C+(mTRAQ0$C*numLab_d0)+(mTRAQ4$C*numLab_d4)+(mTRAQ8$C*numLab_d8)+(carba$C*c)
+    el_temp$H <- el_temp$H+(mTRAQ0$H*numLab_d0)+(mTRAQ4$H*numLab_d4)+(mTRAQ8$H*numLab_d8)+(carba$H*c)
+    el_temp$N <- el_temp$N+(mTRAQ0$N*numLab_d0)+(mTRAQ4$N*numLab_d4)+(mTRAQ8$N*numLab_d8)+(carba$N*c)
+    el_temp$O <- el_temp$O+(mTRAQ0$O*numLab_d0)+(mTRAQ4$O*numLab_d4)+(mTRAQ8$O*numLab_d8)+(carba$O*c)
+    el_temp_df <- data.frame(el_temp)
+    rownames(el_temp_df) <- modseq
+    precs[[i]] <- el_temp_df
+  }
+  
+  iso_env_list <- vector(mode = "list", length = length(precs))
+  # calculate distribution of isotopic envelope
+  for(i in 1:length(precs)){
+    modseq <- rownames(data.frame(precs[i]))
+    temp <- as.numeric(data.frame(precs[i]))
+    iso <- iso_distr(temp)
+    iso_df <- data.frame(t(iso))
+    rownames(iso_df) <- modseq
+    iso_env_list[[i]] <- iso
+  }
+  
+  #unlist into a dataframe
+  indx <- sapply(iso_env_list, length)
+  iso_env_df <- as.data.frame(do.call(rbind,lapply(iso_env_list, `length<-`,
+                                                   max(indx))))
+  colnames(iso_env_df) <- c(paste0("X", seq(1,ncol(iso_env_df), by =1)))
+  rnames <- uni_prec$Modified.Sequence
+  rownames(iso_env_df) <- rnames
+  iso_env_df[is.na(iso_env_df)] <- 0
+  all_carryOver <- iso_env_df %>% rowSums()
+  iso_env_df <- iso_env_df/all_carryOver  #get fraction of each peak 
+  iso_env_df$modseq <- rnames
+  
+  # Now join with the quantitative data, and correct for isotopic carryover
+  dat <- final_all %>% left_join(iso_env_df, by =c("Modified.Sequence" = "modseq"))
+  dat$num_labs <- dat$d0+dat$d4+dat$d8
+  dat <- pD_channel(dat)
+  dat <- dat %>% dplyr::mutate("y" = (X5+X6)/(X1+X2+X5+X6))
+  d0_dat <- dat[grepl("mTRAQ0|mTRAQ-K-0|mTRAQ-n-0", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "num_labs", "Ms1.Extracted", "y") %>% dplyr::rename("d0"="Ms1.Extracted", "y1" = "y")
+  d4_dat <- dat[grepl("mTRAQ4|mTRAQ-K-4|mTRAQ-n-4", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "Ms1.Extracted", "y") %>% dplyr::rename("d4"="Ms1.Extracted", "y2" = "y")
+  d8_dat <- dat[grepl("mTRAQ8|mTRAQ-K-8|mTRAQ-n-8", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "Ms1.Extracted", "y") %>% dplyr::rename("d8"="Ms1.Extracted", "y3" = "y")
+  all_dat <- d0_dat %>% full_join(d4_dat, by =c("seqcharge_run" = "seqcharge_run")) %>%
+    full_join(d8_dat, by =c("seqcharge_run" = "seqcharge_run"))
+  all_dat$d0_iso <- all_dat$d0+all_dat$d0*all_dat$y1
+  all_dat$d4_iso <- all_dat$d4 - all_dat$d0*all_dat$y1 + all_dat$d4*all_dat$y2
+  all_dat$d8_iso <- all_dat$d8 - all_dat$d4*all_dat$y2 + all_dat$d8*all_dat$y3
+  #only do the isotopic correction for precursors with < 2 labels.. otherwise, the difference in mass is enough to avoid impactful isotopic carryover (such is the case with K-containing peptides).
+  all_dat <- all_dat %>% dplyr::mutate(d0_iso = ifelse(num_labs<2, d0_iso, d0)) 
+  all_dat <- all_dat %>% dplyr::mutate(d4_iso = ifelse(num_labs<2, d4_iso, d4)) 
+  all_dat <- all_dat %>% dplyr::mutate(d8_iso = ifelse(num_labs<2, d8_iso, d8)) 
+  all_dat$d0_iso[all_dat$d0_iso<0]<-0 #replace negatives with 0
+  all_dat$d4_iso[all_dat$d4_iso<0]<-0 #replace negatives with 0
+  all_dat$d8_iso[all_dat$d8_iso<0]<-0 #replace negatives with 0
+  all_dat_d0 <- all_dat %>% dplyr::select("seqcharge_run", "d0_iso") %>% dplyr::rename("Ms1.Extracted_iso" = "d0_iso") %>% na.omit()
+  all_dat_d4 <- all_dat %>% dplyr::select("seqcharge_run", "d4_iso")%>% dplyr::rename("Ms1.Extracted_iso" = "d4_iso") %>% na.omit()
+  all_dat_d8 <- all_dat %>% dplyr::select("seqcharge_run", "d8_iso")%>% dplyr::rename("Ms1.Extracted_iso" = "d8_iso") %>% na.omit()
+  d0_dat <- dat[grepl("mTRAQ0|mTRAQ-K-0|mTRAQ-n-0", dat$Modified.Sequence),]
+  d4_dat <- dat[grepl("mTRAQ4|mTRAQ-K-4|mTRAQ-n-4", dat$Modified.Sequence),]
+  d8_dat <- dat[grepl("mTRAQ8|mTRAQ-K-8|mTRAQ-n-8", dat$Modified.Sequence),]
+  
+  d0_dat <- d0_dat %>% left_join(all_dat_d0, by =c("seqcharge_run" = "seqcharge_run"))
+  d4_dat <- d4_dat %>% left_join(all_dat_d4, by =c("seqcharge_run" = "seqcharge_run"))
+  d8_dat <- d8_dat %>% left_join(all_dat_d8, by =c("seqcharge_run" = "seqcharge_run"))
+  dat <- rbind(d0_dat, d4_dat, d8_dat)
+  dat$Ms1.Extracted_iso[is.na(dat$Ms1.Extracted_iso)] <-0
+  dat <- dat %>% dplyr::select(all_of(cnames), "Ms1.Extracted_iso")
+  
+  return(dat)
+} #account for isotopic envelope using Ms1.Extracted
+
+pD_isoCO_Ms1Ext_tims <- function(df, Ms1Ext_df){
+  uni_runs <- unique(df$Run)
+  df <- pD_seqcharge(df)
+  df$seqcharge_run <- paste0(df$seqcharge, df$Run)
+  Ms1Ext_df <- pD_seqcharge(Ms1Ext_df)
+  Ms1Ext_df <- Ms1Ext_df %>% dplyr::select(-contains("Quality")) %>%
+    dplyr::select(-contains("decoy")) %>% dplyr::select(-contains("QValue"))
+  #Ms1Ext_df <- Ms1Ext_df[,!grepl("decoy", colnames(Ms1Ext_df))]
+  #Ms1Ext_df <- Ms1Ext_df[,!grepl("QValue", colnames(Ms1Ext_df))] #remove qvalue columns
+  #Ms1Ext_df <- Ms1Ext_df[,!grepl("Quality", colnames(Ms1Ext_df))] #remove qvalue columns
+  final_all <- data.frame(matrix(ncol = 6, nrow = 0))
+  colnames(final_all) <- c("Protein.Group", "Protein.Names", "Ms1.Extracted", "Precursor.Charge","seqcharge", "Run")
+  for(i in 1:length(uni_runs)){
+    temp <- Ms1Ext_df[,grepl(paste0(uni_runs[i],"|","Modified.Sequence","|","Stripped.Sequence","|","Protein.Group|seqcharge|Protein.Names|Precursor.Charge"), colnames(Ms1Ext_df))]
+    temp <- temp %>% dplyr::select(-contains("Quality"))
+    x <- substr(colnames(temp), nchar(colnames(temp)), nchar(colnames(temp)))
+    #d0
+    temp0 <- temp[,grepl("Precursor.Charge|Modified.Sequence|Stripped.Sequence|Protein.Group|seqcharge|Protein.Names|d.0", colnames(temp))]
+    colnames(temp0) <- c("Protein.Group","Protein.Names", "Stripped.Sequence","Modified.Sequence", "Precursor.Charge","Ms1.Extracted", "seqcharge")
+    temp0$channel_name <- "mTRAQ0"
+    temp0$Modified.Sequence <- str_replace_all(temp0$Modified.Sequence, "\\(mTRAQ\\)","\\(mTRAQ0\\)")
+    temp0 <- temp0[!is.na(temp0$seqcharge),]
+    #d4
+    temp4 <- temp[,grepl("Precursor.Charge|Modified.Sequence|Stripped.Sequence|Protein.Group|seqcharge|Protein.Names|d.4", colnames(temp))]
+    colnames(temp4) <- c("Protein.Group","Protein.Names","Stripped.Sequence","Modified.Sequence","Precursor.Charge", "Ms1.Extracted", "seqcharge")
+    temp4$channel_name <- "mTRAQ4"
+    temp4$Modified.Sequence <- str_replace_all(temp4$Modified.Sequence, "\\(mTRAQ\\)","\\(mTRAQ4\\)")
+    temp4 <- temp4[!is.na(temp4$seqcharge),]
+    #d8
+    temp8 <- temp[,grepl("Precursor.Charge|Modified.Sequence|Stripped.Sequence|Protein.Group|seqcharge|Protein.Names|d.8", colnames(temp))]
+    colnames(temp8) <-  c("Protein.Group","Protein.Names","Stripped.Sequence","Modified.Sequence", "Precursor.Charge","Ms1.Extracted", "seqcharge")
+    temp8$channel_name <- "mTRAQ8"
+    temp8$Modified.Sequence <- str_replace_all(temp8$Modified.Sequence, "\\(mTRAQ\\)","\\(mTRAQ8\\)")
+    temp8 <- temp8[!is.na(temp8$seqcharge),]
+    #combine
+    all_temp <- rbind(temp0,temp4,temp8)
+    all_temp$Run <- paste0(uni_runs[i])
+    final_all <- rbind(final_all, all_temp)
+  }
+  final_all$seqcharge_run <- paste0(final_all$seqcharge, final_all$Run)
+  cnames <- colnames(final_all)
+  mTRAQ0 <- list(C=7, H=12, N=2, O=1)
+  mTRAQ4 <- list(C=4, H=12, N=1, O=1)
+  mTRAQ8 <- list(C=1, H=12, N=0, O=1)
+  
+  
+  # count number of each mTRAQ label type per precursor:
+  final_all$d0 <- str_count(final_all$Modified.Sequence, "mTRAQ0|mTRAQ-K-0|mTRAQ-n-0")
+  final_all$d4 <- str_count(final_all$Modified.Sequence, "mTRAQ4|mTRAQ-K-4|mTRAQ-n-4")
+  final_all$d8 <- str_count(final_all$Modified.Sequence, "mTRAQ8|mTRAQ-K-8|mTRAQ-n-8")
+  
+  uni_prec <- final_all %>% distinct(Modified.Sequence, .keep_all=T)
+  
+  deamid <- list(N=-1, H=-1, O=1)
+  ox <- list(O=1)
+  carba <- list(C=2, H=3, N=1, O=1)
+  
+  precs <- vector(mode = "list", length = nrow(uni_prec))
+  # get chemical formula for each peptide
+  for(i in 1:nrow(uni_prec)){
+    tempseq <- paste0(uni_prec$Stripped.Sequence[i])
+    modseq <- paste0(uni_prec$Modified.Sequence[i])
+    numLab_d0 <- uni_prec$d0[i]
+    numLab_d4 <- uni_prec$d4[i]
+    numLab_d8 <- uni_prec$d8[i]
+    
+    ## other modifications
+    d <- str_count(uni_prec$Modified.Sequence[i], "UniMod:7")
+    o <- str_count(uni_prec$Modified.Sequence[i], "UniMod:35")
+    c <- str_count(uni_prec$Modified.Sequence[i], "UniMod:4")
+    
+    # ch <- as.numeric(paste0(uni_prec$Precursor.Charge[i]))
+    el_temp <- ConvertPeptide(tempseq)
+    el_temp$C <- el_temp$C+(mTRAQ0$C*numLab_d0)+(mTRAQ4$C*numLab_d4)+(mTRAQ8$C*numLab_d8)+(carba$C*c)
+    el_temp$H <- el_temp$H+(mTRAQ0$H*numLab_d0)+(mTRAQ4$H*numLab_d4)+(mTRAQ8$H*numLab_d8)+(carba$H*c)
+    el_temp$N <- el_temp$N+(mTRAQ0$N*numLab_d0)+(mTRAQ4$N*numLab_d4)+(mTRAQ8$N*numLab_d8)+(carba$N*c)
+    el_temp$O <- el_temp$O+(mTRAQ0$O*numLab_d0)+(mTRAQ4$O*numLab_d4)+(mTRAQ8$O*numLab_d8)+(carba$O*c)
+    el_temp_df <- data.frame(el_temp)
+    rownames(el_temp_df) <- modseq
+    precs[[i]] <- el_temp_df
+  }
+  
+  iso_env_list <- vector(mode = "list", length = length(precs))
+  # calculate distribution of isotopic envelope
+  for(i in 1:length(precs)){
+    modseq <- rownames(data.frame(precs[i]))
+    temp <- as.numeric(data.frame(precs[i]))
+    iso <- iso_distr(temp)
+    iso_df <- data.frame(t(iso))
+    rownames(iso_df) <- modseq
+    iso_env_list[[i]] <- iso
+  }
+  
+  #unlist into a dataframe
+  indx <- sapply(iso_env_list, length)
+  iso_env_df <- as.data.frame(do.call(rbind,lapply(iso_env_list, `length<-`,
+                                                   max(indx))))
+  colnames(iso_env_df) <- c(paste0("X", seq(1,ncol(iso_env_df), by =1)))
+  rnames <- uni_prec$Modified.Sequence
+  rownames(iso_env_df) <- rnames
+  iso_env_df[is.na(iso_env_df)] <- 0
+  all_carryOver <- iso_env_df %>% rowSums()
+  iso_env_df <- iso_env_df/all_carryOver  #get fraction of each peak 
+  iso_env_df$modseq <- rnames
+  
+  # Now join with the quantitative data, and correct for isotopic carryover
+  dat <- final_all %>% left_join(iso_env_df, by =c("Modified.Sequence" = "modseq"))
+  dat$num_labs <- dat$d0+dat$d4+dat$d8
+  dat <- pD_channel(dat)
+  dat <- dat %>% dplyr::mutate("y" = (X5+X6)/(X1+X2+X5+X6))
+  d0_dat <- dat[grepl("mTRAQ0|mTRAQ-K-0|mTRAQ-n-0", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "num_labs", "Ms1.Extracted", "y") %>% dplyr::rename("d0"="Ms1.Extracted", "y1" = "y")
+  d4_dat <- dat[grepl("mTRAQ4|mTRAQ-K-4|mTRAQ-n-4", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "Ms1.Extracted", "y") %>% dplyr::rename("d4"="Ms1.Extracted", "y2" = "y")
+  d8_dat <- dat[grepl("mTRAQ8|mTRAQ-K-8|mTRAQ-n-8", dat$Modified.Sequence),] %>%
+    dplyr::select("seqcharge_run", "Ms1.Extracted", "y") %>% dplyr::rename("d8"="Ms1.Extracted", "y3" = "y")
+  all_dat <- d0_dat %>% full_join(d4_dat, by =c("seqcharge_run" = "seqcharge_run")) %>%
+    full_join(d8_dat, by =c("seqcharge_run" = "seqcharge_run"))
+  all_dat$d0_iso <- all_dat$d0+all_dat$d0*all_dat$y1
+  all_dat$d4_iso <- all_dat$d4 - all_dat$d0*all_dat$y1 + all_dat$d4*all_dat$y2
+  all_dat$d8_iso <- all_dat$d8 - all_dat$d4*all_dat$y2 + all_dat$d8*all_dat$y3
+  #only do the isotopic correction for precursors with < 2 labels.. otherwise, the difference in mass is enough to avoid impactful isotopic carryover (such is the case with K-containing peptides).
+  all_dat <- all_dat %>% dplyr::mutate(d0_iso = ifelse(num_labs<2, d0_iso, d0)) 
+  all_dat <- all_dat %>% dplyr::mutate(d4_iso = ifelse(num_labs<2, d4_iso, d4)) 
+  all_dat <- all_dat %>% dplyr::mutate(d8_iso = ifelse(num_labs<2, d8_iso, d8)) 
+  all_dat$d0_iso[all_dat$d0_iso<0]<-0 #replace negatives with 0
+  all_dat$d4_iso[all_dat$d4_iso<0]<-0 #replace negatives with 0
+  all_dat$d8_iso[all_dat$d8_iso<0]<-0 #replace negatives with 0
+  all_dat_d0 <- all_dat %>% dplyr::select("seqcharge_run", "d0_iso") %>% dplyr::rename("Ms1.Extracted_iso" = "d0_iso") %>% na.omit()
+  all_dat_d4 <- all_dat %>% dplyr::select("seqcharge_run", "d4_iso")%>% dplyr::rename("Ms1.Extracted_iso" = "d4_iso") %>% na.omit()
+  all_dat_d8 <- all_dat %>% dplyr::select("seqcharge_run", "d8_iso")%>% dplyr::rename("Ms1.Extracted_iso" = "d8_iso") %>% na.omit()
+  d0_dat <- dat[grepl("mTRAQ0|mTRAQ-K-0|mTRAQ-n-0", dat$Modified.Sequence),]
+  d4_dat <- dat[grepl("mTRAQ4|mTRAQ-K-4|mTRAQ-n-4", dat$Modified.Sequence),]
+  d8_dat <- dat[grepl("mTRAQ8|mTRAQ-K-8|mTRAQ-n-8", dat$Modified.Sequence),]
+  
+  d0_dat <- d0_dat %>% left_join(all_dat_d0, by =c("seqcharge_run" = "seqcharge_run"))
+  d4_dat <- d4_dat %>% left_join(all_dat_d4, by =c("seqcharge_run" = "seqcharge_run"))
+  d8_dat <- d8_dat %>% left_join(all_dat_d8, by =c("seqcharge_run" = "seqcharge_run"))
+  dat <- rbind(d0_dat, d4_dat, d8_dat)
+  dat$Ms1.Extracted_iso[is.na(dat$Ms1.Extracted_iso)] <-0
+  dat <- dat %>% dplyr::select(all_of(cnames), "Ms1.Extracted_iso")
+  
+  return(dat)
+} #account for isotopic envelope using Ms1.Extracted on results from .d files
+
+
+
+```
+
+analysis
+```{r}
+
+####### set file paths:
+SC_ms1ext_fpath <- "" #pr_matrix_channels_ms1_extracted Report output from DIA-NN
+SC_fpath <- "" #main Report output from DIA-NN
+
+meta_fpath <- "" #meta file path
+#### meta info should have columns: "Raw", "Celltype", "Label", "LC_batch"... 
+#"Raw" is the run name, 
+#"Celltype" is the celltype,
+#"Label" is a number specifying the delta mass offset (e.g. 0, 4, or 8 for mTRAQ labels)
+#"LC_batch" is a unique string that marks runs which were acquired with the same LC settings/column.
+
+###############################
+###############################
+###############################
+###############################
+
+meta <- read.delim(meta_fpath)  #read in meta file
+SC <- data.frame(fread(SC_fpath))  #read in report
+SC_ms1ext <- data.frame(fread(SC_ms1ext_fpath))  #read in MS1.Extracted report
+#SC <- SC[which(SC$Proteotypic==1),]  #only use if want proteotypic peptides
+SC <- SC[which(SC$Lib.PG.Q.Value<0.01),] #PGs at 1% FDR
+qev <- pD_isoCO_Ms1Ext(SC, SC_ms1ext)  #Extract Ms1 signal from the Ms1.Extracted matrix and correct for isotopic carryover (QE)
+
+#qev <- pD_isoCO_Ms1Ext_tims(SC, SC_ms1ext)  #same as above, but for timsTOFs (or anything with.d files)
+
+qev_keep <- qev
+qev <- pD_channel(qev)
+qev$runchan <- paste0(qev$Run, qev$channel_name)
+
+colnames(qev)
+
+par(mfrow=c(1,1))
+qev$prot <- qev$Protein.Group
+qev$seqcharge<-paste0(qev$Stripped.Sequence, qev$Precursor.Charge) #make a "sequence and charge column"
+q0<- qev %>% dplyr::select("Run","channel_name","Ms1.Extracted", "prot", "seqcharge")
+q0$run_chan <- paste0(q0$Run, q0$channel_name) #make sample-specific column
+meta$run_chan <- paste0(meta$Raw, "mTRAQ",meta$Label) #make sample-specific column in meta file
+no_neg <- meta[!grepl("Neg|BLANK", meta$Celltype),] #remove negatives and blanks from meta file
+no_neg1 <- no_neg %>% dplyr::select(-c("Raw","Label") )
+meta1 <- meta %>% dplyr::select("run_chan","Celltype" ) 
+dat_fin<-q0 %>% inner_join(meta1, by =c("run_chan"="run_chan")) #append celltype information to data
+dat_fin <- dat_fin[which(dat_fin$Ms1.Extracted>0),] #remove zero values and NA
+
+#normalize precursors to the median of each sample, then normalize to mean across samples
+dat_fin <- dat_fin %>% dplyr::group_by(Run, channel_name) %>% 
+  dplyr::mutate("norm" = Ms1.Extracted/median(Ms1.Extracted, na.rm=T)) %>% dplyr::ungroup() %>%
+  dplyr::group_by(seqcharge) %>% dplyr::mutate("norm" = norm/mean(norm, na.rm=T)) %>% dplyr::ungroup() 
+
+#calculate CVs of precursors to a protein
+cvs <- dat_fin %>% dplyr::group_by(run_chan, prot) %>% add_count() %>% dplyr::filter(n>3) %>%
+  dplyr::mutate("cv" = sd(norm)/mean(norm)) %>% ungroup() %>% 
+  distinct(run_chan, prot, .keep_all=T) %>%
+  group_by(run_chan) %>% dplyr::mutate("med_cv" = median(cv)) %>% add_count() %>%
+  distinct(run_chan, .keep_all = T) %>% dplyr::ungroup()
+
+maxCV <- 0.45 #maximum CV tolerable for downstream single-cell analysis
+minProts <- 75 #minimum proteins for downstream single-cell analysis
+ggplot(cvs) + 
+  labs(y = "Proteins with >3 quantified precursors",
+       color = "", x ="Median CV of precursors for a protein") + 
+  theme_bw() +
+  annotate("rect", xmin=-Inf, xmax=maxCV, ymin=minProts, ymax=Inf, color="gray10", fill="gray30") +
+  geom_point(aes(x=med_cv, y = nn, color=Celltype)) +theme(legend.position = c(0.70, 0.80),
+                                                       legend.text = element_text(size=14),
+                                                       legend.background =  element_rect(fill="white",
+                                  size=0.2, linetype="solid", 
+                                  colour ="gray40"),
+                                  legend.title = element_blank(),
+                                  axis.title = element_text(size=14),
+                                  axis.text = element_text(size=12))
+#ggsave(".png", width=5, height=5,dpi=300)
+
+cvs <- cvs %>% dplyr::mutate("real" = ifelse(grepl("Neg", Celltype), "Negative control", "Single cell"))
+
+ggplot(cvs) + 
+  labs(y = "Proteins with >3 quantified precursors",
+       color = "", x ="Median CV of precursors for a protein") + 
+  theme_bw() +
+  annotate("rect", xmin=-Inf, xmax=maxCV, ymin=minProts, ymax=Inf, color="gray10", fill="gray30") +
+  geom_point(aes(x=med_cv, y = nn, color=real)) +theme(legend.position = c(0.70, 0.80),
+                                                       legend.text = element_text(size=14),
+                                                       legend.background =  element_rect(fill="white",
+                                  size=0.2, linetype="solid", 
+                                  colour ="gray40"),
+                                  legend.title = element_blank(),
+                                  axis.title = element_text(size=14),
+                                  axis.text = element_text(size=12))
+#ggsave(".png", width=5, height=5,dpi=300)
+
+keep <- cvs[which(cvs$nn>minProts & cvs$med_cv<maxCV),] #keep these cells only
+
+dat <- dat_fin[dat_fin$run_chan%in%keep$run_chan,] #apply the cell filter
+
+######## collapse quant to peptide level then protein level: ###########
+dat$Stripped.Sequence <- substr(dat$seqcharge,1,nchar(dat$seqcharge)-1)
+
+#peptide quantity is the median, normalized prec value for a given peptide:
+dat_fin_pep <- dat %>% dplyr::group_by(run_chan, Stripped.Sequence) %>% 
+  dplyr::mutate("pep_quan" = median(norm, na.rm=T)) %>% dplyr::ungroup() %>%
+  dplyr::group_by(Stripped.Sequence) %>% dplyr::mutate("pep_quan" = pep_quan/mean(pep_quan, na.rm=T)) %>%
+  dplyr::ungroup() %>%
+  distinct(run_chan, Stripped.Sequence, .keep_all=T)
+
+#protein quantity is the median, normalized peptide value for a given protein:
+dat_fin_prot <- dat_fin_pep %>% dplyr::group_by(run_chan, prot) %>% 
+  dplyr::mutate("prot_quan" = median(norm, na.rm=T)) %>% dplyr::ungroup() %>%
+  dplyr::group_by(prot) %>% dplyr::mutate("prot_quan" = prot_quan/mean(prot_quan, na.rm=T)) %>%
+  dplyr::ungroup() %>%
+  distinct(run_chan, prot, .keep_all=T)
+
+dat_fin_prot$prot_quan[dat_fin_prot$prot_quan==0]<-NA
+
+dat_fin1 <- dat_fin_prot %>% dplyr::select("prot", "run_chan", "prot_quan")
+dat_fin1$prot <- as.factor(dat_fin1$prot)
+dat_fin1$run_chan <- as.factor(dat_fin1$run_chan)
+dat_fin1$prot_quan <- as.numeric(dat_fin1$prot_quan)
+
+dat_fin2<-dcast(dat_fin1, prot~run_chan, value.var = "prot_quan", fill=NA)
+
+t4<-as.matrix(dat_fin2[,-1]); row.names(t4)<-dat_fin2[,1]
+
+dat2<-t4
+dim(dat2)
+
+
+## Impute single celldata
+imp.input<-(filt.mat.rc(dat2,0.95,0.95))
+length(which(is.na(imp.input)))
+length(which((imp.input==0)))
+
+dim(imp.input)
+
+sc.imp <- hknn(imp.input, 5)
+sc.imp <- log2(sc.imp)
+sc.imp<-cr_norm_log((sc.imp))
+
+
+length(which(is.na(sc.imp)))
+length(which((sc.imp==0)))
+
+dim(sc.imp)
+
+sc.imp[is.na(sc.imp)]<-0
+
+no_neg$lab_set <- paste0(no_neg$Label, no_neg$LC_batch) #batches will be based on mTRAQ label and LC batch(es)
+batch.covs <-no_neg$lab_set[match(colnames(sc.imp), no_neg$run_chan)]
+mod<-data.frame(no_neg$Celltype[match(colnames(sc.imp), no_neg$run_chan)]); colnames(mod)<-"celltype"
+mod<-model.matrix(~as.factor(celltype), data=mod)
+matrix.sc.batch <- ComBat(sc.imp, batch=batch.covs, mod=mod)
+dim(matrix.sc.batch)
+
+
+#output protein-level quant for each cell
+mat.sc.imp<-cr_norm_log((matrix.sc.batch))
+mat.sc.imp1 <- melt(mat.sc.imp); colnames(mat.sc.imp1)<-c("prot","id","value")
+# Re map ...
+mat.sc.imp1 <- dcast(mat.sc.imp1, id ~ prot, value.var = "value", fill=NA)
+mat.sc.imp1$celltype<-no_neg$Celltype[match(mat.sc.imp1$id, no_neg$run_chan)]
+mat.sc.imp1 <- mat.sc.imp1 %>% dplyr::select(-"id")
+mat.sc.imp1$celltype <- make.names(mat.sc.imp1$celltype, unique=T)
+mat.sc.imp1 <- melt(mat.sc.imp1); colnames(mat.sc.imp1)<-c("cell","prot","value")
+mat.sc.imp1$cell <- as.factor(mat.sc.imp1$cell)
+mat.sc.imp2 <- dcast(mat.sc.imp1, prot~cell, value.var = "value", fill=NA)
+
+#write.table(mat.sc.imp2, "Proteins.txt", sep = "\t", row.names = FALSE)
+
+
+
+####### generate PCA: 
+prePCA <- mat.sc.imp
+# # Dot product of each protein correlation vector with itself
+r1<-cor(t(mat.sc.imp))
+rsum<-rowSums(r1^2)
+# Calculate the weighted data matrix:
+X.m <- mat.sc.imp
+X.m <- diag(rsum) %*%  X.m
+# pca.imp.cor <- cor(X.m, use="complete.obs")
+pca.imp.cor <- cor(X.m, use="complete.obs")
+# PCA
+sc.pca<-eigen(pca.imp.cor)
+scx<-as.data.frame(sc.pca$vectors)
+colnames(scx)<-paste0("PC",1:ncol(scx))
+scx$cells<-colnames(pca.imp.cor)
+# Percent of variance explained by each principle component
+pca_var <- sc.pca$values
+percent_var<- pca_var/sum(pca_var)*100
+plot(1:length(percent_var), percent_var, xlab="PC", ylab="% of variance explained")
+# Map meta data
+pca.melt <- melt(scx); colnames(pca.melt)<-c("id","pc","value")
+# Re map ...
+pca.display <- dcast(pca.melt, id ~ pc, value.var = "value", fill=NA)
+pca.display$celltype<-no_neg$Celltype[match(pca.display$id, no_neg$run_chan)]
+pca.display$label<-no_neg$Label[match(pca.display$id, no_neg$run_chan)]
+
+# PC's to display:
+PCx<-"PC1"
+PCy<-"PC2"
+PCz<-"PC3"
+PCza<-"PC4"
+PCzb<-"PC5"
+
+my_fin_colors <- c("#4B2991","#A3319F","#EDD9A3", "#55C667FF")
+
+
+# Display
+pca.display$lab <- paste0("d",pca.display$label)
+check <- pca.display %>% dplyr::select("id","PC1","PC2","celltype")
+
+
+pxlab<-ggplot(pca.display,aes(x =PC1, y = PC2, color =lab),  size = 3, alpha=0.5) +
+  labs(color = "Label", shape="",x = paste0(PCx,"  (", round(percent_var[1],0),"%)"), y = paste0(PCy,"  (", round(percent_var[2],0),"%)")) +
+  scale_shape_manual(values = c(23,16,15)) + 
+  scale_alpha_manual(values = c(0.66,0.66,0.66)) +
+   geom_point()+
+   geom_point(colour="black",alpha=0.15) +
+  geom_point(data = pca.display %>% dplyr::filter(grepl("_DB", celltype)),aes(x = PC1, y = PC2),size = 1, color = "black", shape = 23,stroke = 1.2,alpha=0.7)+
+  geom_point(data = pca.display %>% dplyr::filter(grepl("_DB", celltype)),aes(x = PC1, y = PC2),size = 2, color = "black", shape = 23,stroke = 1.2, alpha=0.7)+
+  geom_point(data = pca.display %>% dplyr::filter(grepl("_DB", celltype)),aes(x = PC1, y = PC2), size = 1.5,shape = 23,stroke = 0.6,alpha=1) +
+     theme_classic() +
+      theme(
+        legend.position = "top",
+        legend.background = element_rect(color = "transparent", fill = "transparent")) +
+    scale_color_manual(values = my_fin_colors)+
+      scale_fill_manual(values = my_fin_colors)+
+    annotate("text", x=-0.072, y=-0.1, label=paste0(ncol(mat.sc.imp), " cells"), size=3) +
+  annotate("text", x=-0.04, y=-0.12, label=paste0(dim(mat.sc.imp)[1], " protein groups"), size=3)+
+  guides(fill = "none", size = "none",alpha = "none") 
+pxlab
+#ggsave("PCA_LabBias.pdf", width=3,height=3.2)
+
+
+
+px<-ggplot(pca.display,aes(x =PC1, y = PC2, color =celltype)) +
+  labs(shape="",x = paste0(PCx,"  (", round(percent_var[1],0),"%)"), y = paste0(PCy,"  (", round(percent_var[2],0),"%)"), color = "") +
+  scale_shape_manual(values = c(23,16,15)) + 
+  scale_alpha_manual(values = c(0.66,0.66,0.66)) +
+   geom_point(size=3, alpha=0.7) +
+     theme_classic() +
+      theme(
+        legend.position = "top",
+        legend.background = element_rect(color = "transparent", fill = "transparent")) +
+    scale_color_brewer(palette = "Set2")+
+      scale_fill_manual(values = my_fin_colors)+
+    annotate("text", x=-0.05, y=-0.22, label=paste0(ncol(mat.sc.imp), " cells"), size=3) +
+  annotate("text", x=-0.05, y=-0.24, label=paste0(dim(mat.sc.imp)[1], " protein groups"), size=3)
+px
+
+#ggsave(".pdf", width=4.5,height=5)
+
+```
