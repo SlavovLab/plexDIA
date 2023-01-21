@@ -38,7 +38,7 @@ Current mass-spectrometry methods enable high-throughput proteomics of large sam
 
 
 ## Perspectives on high-throughput multiplexed proteomics
-* [Strategies for increasing the depth and throughput of protein analysis by plexDIA](https://www.biorxiv.org/content/10.1101/2022.11.05.515287v2)  *bioRxiv*
+* [Strategies for increasing the depth and throughput of protein analysis by plexDIA](https://www.biorxiv.org/content/10.1101/2022.11.05.515287v2)  *Journal of Proteome Research*
 * [Framework for multiplicative scaling of single-cell proteomics](https://www.nature.com/articles/s41587-022-01411-1), *Nature Biotechnology*
 * [Increasing proteomics throughput](https://www.nature.com/articles/s41587-021-00881-z), *Nature Biotechnology*
 * [Driving Single Cell Proteomics Forward with Innovation](https://pubmed.ncbi.nlm.nih.gov/34597050/), *Journal of Proteome Research*
