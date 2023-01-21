@@ -30,7 +30,7 @@ Accurate protein quantification is key to identifying protein markers, regulator
 -----
 
 
-Jason Derks, Nikolai Slavov, *Strategies for increasing the depth and throughput of protein analysis by plexDIA*, bioRxiv 2022.11.05.515287; doi: https://doi.org/10.1101/2022.11.05.515287
+Jason Derks, Nikolai Slavov, *Strategies for increasing the depth and throughput of protein analysis by plexDIA*, bioRxiv 2022.11.05.515287; doi: [10.1101/2022.11.05.515287](https://doi.org/10.1101/2022.11.05.515287)
 
 
 
