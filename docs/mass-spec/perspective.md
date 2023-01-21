@@ -9,20 +9,28 @@ nav_exclude: false
 {% include social-media-links.html %}
 
 # plexDIA perspective
-## Strategies for increasing the depth and throughput of protein analysis by plexDIA
-&nbsp;
+## Strategies for increasing the depth & throughput of protein analysis
 
 &nbsp;
+
 
 [Perspective Article][plexDIA_perspective_Article]{: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Github code](https://github.com/SlavovLab/plexDIA_perspective){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
+&nbsp;
+
+[![](Figures/plexDIA_Perspective.png){: width="80%" .center-image}][plexDIA_perspective_Article]
 
 
-[![](Figures/plexDIA_Perspective.png){: width="100%" .center-image}][plexDIA_perspective_Article]
-
+----
 
 Accurate protein quantification is key to identifying protein markers, regulatory relationships between proteins, and pathophysiological mechanisms. Realizing this potential requires sensitive and deep protein analysis of a large number of samples. Toward this goal, proteomics throughput can be increased by parallelizing the analysis of both precursors and samples using multiplexed data independent acquisition (DIA) implemented by the [plexDIA framework](https://www.nature.com/articles/s41587-022-01411-1). Here we demonstrate the improved precisions of RT estimates within plexDIA and how this enables more accurate protein quantification. plexDIA has demonstrated multiplicative gains in throughput, and these gains may be substantially amplified by improving the multiplexing reagents, data acquisition and interpretation. We discuss future directions for advancing plexDIA, which include engineering optimized mass-tags for high-plexDIA, introducing isotopologous carriers, and developing algorithms that utilize the regular structures of plexDIA data to improve sensitivity, proteome coverage and quantitative accuracy. These advances in plexDIA will increase the throughput of functional proteomic assays, including quantifying protein conformations, turnover dynamics, modifications states and activities. The sensitivity of these assays will extend to single-cell analysis, thus enabling functional single-cell protein analysis.
+
+
+-----
+
+
+Jason Derks, Nikolai Slavov, *Strategies for increasing the depth and throughput of protein analysis by plexDIA*, bioRxiv 2022.11.05.515287; doi: https://doi.org/10.1101/2022.11.05.515287
 
 
 
