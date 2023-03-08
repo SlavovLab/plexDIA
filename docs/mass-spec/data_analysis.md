@@ -28,6 +28,12 @@ Searching [plexDIA data](https://scp.slavovlab.net/Derks_et_al_2022) with [DIA-N
 
 [Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
 
+## Analyzing plexDIA data
+
+* [Video tutorial on searching plexDIA data with DIA-NN](https://youtu.be/0Wmg9LjDtgE), [Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
+* [Pipeline for processing plexDIA data @ GitHub](https://github.com/SlavovLab/SPP)
+* [Data-Driven Optimization of plexDIA by DO-MS](https://do-ms.slavovlab.net/) &nbsp; | &nbsp; [DO-MS @ GitHub](https://github.com/SlavovLab/DO-MS)
+
 -------
 
 &nbsp;
