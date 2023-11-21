@@ -14,7 +14,8 @@
 <img src="https://scp.slavovlab.net/Figs/plexDIA_4.png" width="70%">
 
 
-**Perspective:** Derks, J., Slavov N., Strategies for increasing the depth and throughput of protein analysis by plexDIA,  [10.1101/2022.11.05.515287](https://doi.org/10.1101/2022.11.05.515287), [GitHub](https://github.com/SlavovLab/plexDIA_perspective)
+**Perspective:** Derks, J., Slavov N., Strategies for increasing the depth and throughput of protein analysis by plexDIA,  [10.1101/2022.11.05.515287](https://doi.org/10.1101/2022.11.05.515287), [GitHub](https://github.com/SlavovLab/plexDIA_perspective) 
+*J. Proteome Res.* 22(10):3149-3158 [10.1021/acs.jproteome.3c00177](https://pubs.acs.org/doi/10.1021/acs.jproteome.3c00177)
 
 &nbsp;
 
