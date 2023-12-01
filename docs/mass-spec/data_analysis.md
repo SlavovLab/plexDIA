@@ -9,12 +9,20 @@ nav_exclude: false
 {% include social-media-links.html %}
 
 # Analyzing plexDIA data
+{:.no_toc}
 
 &nbsp;
 
+{: .fs-5 .fw-300}
+This section organizes libraries, tutorials and links to software and pipelines for searching, optimizing and analyzing plexDIA data.
 
+* Will be replaced with the ToC, excluding the section header
+{:toc}
+
+&nbsp;
 
 ## Searching plexDIA data
+
 
 ### Libraries for searching plexDIA data
 
@@ -35,28 +43,13 @@ These libraries are for searching spectra from mTRAQ-labeled peptides. All libra
 
 
 ### Tutorial on searching plexDIA data
-Searching [plexDIA data](https://scp.slavovlab.net/Derks_et_al_2022) with [DIA-NN](https://github.com/vdemichev/DiaNN/releases/tag/1.8.1) is described in this [tutorial](https://youtu.be/0Wmg9LjDtgE).
+Searching [plexDIA data](https://scp.slavovlab.net/Derks_et_al_2022) with [DIA-NN](https://github.com/vdemichev/DiaNN/releases/tag/1.8.1) is described in this [tutorial](https://youtu.be/0Wmg9LjDtgE). The tutorial is for DIA-NN v1.8.1 and searching with later versions of DIA-NN has some changes.  
 * [Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0Wmg9LjDtgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 &nbsp;
 
-
-
-## Data pipelines for optimizing and processing plexDIA data
-A [pipeline][plexDIA_Code] for analyzing plexDIA data and reproducing the analysis by [Derks et al][plexDIA_Nature] are available at the [plexDIA GitHub repository][plexDIA_Code].  
-
-
-* [Pipeline for processing plexDIA data @ GitHub](https://github.com/SlavovLab/SPP)
-* [Data-Driven Optimization of plexDIA by DO-MS](https://do-ms.slavovlab.net/),  [DO-MS @ GitHub](https://github.com/SlavovLab/DO-MS)
-
-
--------
-
-&nbsp;
-
-&nbsp;
 
 [Detailed methods](https://www.nature.com/articles/s41587-022-01389-w#Sec12) can be found at:
 
@@ -69,6 +62,17 @@ Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensiti
 [plexDIA_Nature]: https://doi.org/10.1038/s41587-022-01389-w "Derks, J., Slavov, N. et al. Increasing the throughput of sensitive proteomics by plexDIA. Nat Biotechnol (2022)"
 [plexDIA_Code]: https://github.com/SlavovLab/plexDIA "plexDIA data analysis pipeline, GitHub repository from the Slavov Laboratory"
 
+
+
+## Data pipelines for optimizing and processing plexDIA data
+A [pipeline][plexDIA_Code] for analyzing plexDIA data and reproducing the analysis by [Derks et al][plexDIA_Nature] are available at the [plexDIA GitHub repository][plexDIA_Code].  
+
+
+* [Pipeline for processing plexDIA data @ GitHub](https://github.com/SlavovLab/SPP)
+* [Data-Driven Optimization of plexDIA by DO-MS](https://do-ms.slavovlab.net/),  [DO-MS @ GitHub](https://github.com/SlavovLab/DO-MS)
+
+
+-------
 
 
 
