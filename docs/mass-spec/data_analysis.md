@@ -45,11 +45,11 @@ These libraries are for searching spectra from mTRAQ-labeled peptides. All libra
 ## Tutorial on searching plexDIA data
 Searching [plexDIA data](https://scp.slavovlab.net/Derks_et_al_2022) with [DIA-NN](https://github.com/vdemichev/DiaNN/releases/tag/1.8.1) is described in this [tutorial](https://youtu.be/0Wmg9LjDtgE). The tutorial is for DIA-NN v1.8.1 and searching with later versions of DIA-NN has some changes.  
 
-<div style="text-aligh: center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0Wmg9LjDtgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
- [Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
 
-</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0Wmg9LjDtgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
+
 
 &nbsp;
 
