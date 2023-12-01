@@ -42,7 +42,7 @@ These libraries are for searching spectra from mTRAQ-labeled peptides. All libra
 
 
 
-### Tutorial on searching plexDIA data
+## Tutorial on searching plexDIA data
 Searching [plexDIA data](https://scp.slavovlab.net/Derks_et_al_2022) with [DIA-NN](https://github.com/vdemichev/DiaNN/releases/tag/1.8.1) is described in this [tutorial](https://youtu.be/0Wmg9LjDtgE). The tutorial is for DIA-NN v1.8.1 and searching with later versions of DIA-NN has some changes.  
 * [Download Slides](https://plexdia.slavovlab.net/mass-spec/Searching-plexDIA-data-with-DIA-NN.pdf)
 
@@ -51,10 +51,7 @@ Searching [plexDIA data](https://scp.slavovlab.net/Derks_et_al_2022) with [DIA-N
 &nbsp;
 
 
-[Detailed methods](https://www.nature.com/articles/s41587-022-01389-w#Sec12) can be found at:
-
-Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensitive proteomics by plexDIA. *Nat Biotechnol* (2022). [10.1038/s41587-022-01389-w][plexDIA_Nature],  [Preprint][plexDIA_Article]
-* [Nature Research Briefing](https://www.nature.com/articles/s41587-022-01411-1)
+These [detailed methods](https://www.nature.com/articles/s41587-022-01389-w#Sec12) are from: Derks, J., Leduc, A., Wallmann, G. *et al.* Increasing the throughput of sensitive proteomics by plexDIA. *Nat Biotechnol* (2022). [10.1038/s41587-022-01389-w][plexDIA_Nature],  [Preprint][plexDIA_Article], [Nature Research Briefing](https://www.nature.com/articles/s41587-022-01411-1)
 
 
 
