@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Perspective
+title: Optimization
 nav_order: 5
 permalink: mass-spec/Optimization
 description: "plexDIA optimization: Data-Driven Optimization of DIA and multiplexed DIA (plexDIA) Mass Spectrometry by DO-MS"
@@ -25,13 +25,13 @@ nav_exclude: false
 ----
 
 
-Mass spectrometry (MS) enables specific and accurate quantification of proteins with ever-increasing throughput and sensitivity. Maximizing this potential of MS requires optimizing data acquisition parameters and performing efficient quality control for large datasets. To facilitate these objectives for data-independent acquisition (DIA), we developed a second version of our framework for data-driven optimization of MS methods (DO-MS). The DO-MS app v2.0 (do-ms.slavovlab.net) allows one to optimize and evaluate results from both label-free and multiplexed DIA ([plexDIA framework](https://www.nature.com/articles/s41587-022-01411-1)) and supports optimizations particularly relevant to single-cell proteomics. We demonstrate multiple use cases, including optimization of duty cycle methods, peptide separation, number of survey scans per duty cycle, and quality control of single-cell plexDIA data. DO-MS allows for interactive data display and generation of extensive reports, including publication of quality figures that can be easily shared. The source code is available at github.com/SlavovLab/DO-MS.
+Mass spectrometry (MS) enables specific and accurate quantification of proteins with ever-increasing throughput and sensitivity. Maximizing this potential of MS requires optimizing data acquisition parameters and performing efficient quality control for large datasets. To facilitate these objectives for data-independent acquisition (DIA), we developed a second version of our framework for data-driven optimization of MS methods (DO-MS). The DO-MS app v2.0 (do-ms.slavovlab.net) allows one to optimize and evaluate results from both label-free and multiplexed DIA ([plexDIA](https://www.nature.com/articles/s41587-022-01411-1)) and supports optimizations particularly relevant to single-cell proteomics. We demonstrate multiple use cases, including optimization of duty cycle methods, peptide separation, number of survey scans per duty cycle, and quality control of single-cell plexDIA data. DO-MS allows for interactive data display and generation of extensive reports, including publication of quality figures that can be easily shared. The source code is available at github.com/SlavovLab/DO-MS.
 
 
 -----
 
 
-Wallmann G., Leduc A., Slavov N., **Data-Driven Optimization of DIA Mass Spectrometry by DO-MS**, *J. Proteome Res.*, doi: [10.1021/acs.jproteome.3c00177][plexDIA_DO-MS_Article]; Preprint at *bioRxiv* doi: [10.1101/2023.02.02.526809][plexDIA_DO-MS_Preprint]
+Wallmann G., Leduc A., Slavov N., **Data-Driven Optimization of DIA Mass Spectrometry by DO-MS**, *J. Proteome Res.*, doi: [10.1021/acs.jproteome.3c00177][plexDIA_DO-MS_Article]; Preprint at *bioRxiv* doi: [10.1101/2023.02.02.526809][plexDIA_DO-MS_Preprint], [PDF](https://slavovlab.net/Slavov-Lab-Publications/2023_DO-MS_DIA_plexDIA_JPR.pdf)
 
 
 
